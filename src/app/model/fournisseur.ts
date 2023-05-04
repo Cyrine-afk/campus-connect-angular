@@ -1,3 +1,5 @@
+import { SpecialtyFourn } from "./specialty-fourn";
+
 export class Fournisseur {
     idFourn : any;
     adrFourn : any;
@@ -5,4 +7,5 @@ export class Fournisseur {
     nomFourn : any;
     telFourn : any;
     emailFourn : any;
+    specialtyFourn!: SpecialtyFourn;
 }

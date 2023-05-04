@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Fournisseur } from '../model/fournisseur';
 import { FournisseurService } from '../services/fournisseur/fournisseur.service';
+import { SpecialtyFourn, SpecialtyFourn2LabelMapping } from '../model/specialty-fourn';
 
 @Component({
   selector: 'app-fournisseur-list',
@@ -8,6 +9,8 @@ import { FournisseurService } from '../services/fournisseur/fournisseur.service'
   styleUrls: ['./fournisseur-list.component.css']
 })
 export class FournisseurListComponent implements OnInit {
+
+  
 
   fournisseurs!: Fournisseur[]; //to get the list of the fournisseurs in it
   public searchTxt: Fournisseur['nomFourn'];
