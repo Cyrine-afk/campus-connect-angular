@@ -20,4 +20,13 @@ export class FournisseurListComponent implements OnInit {
     //the subscribe is because the return type of the getAllFournisseurs() function is post/get/put/delete, so once it's ready the subscribe function is going to call the get/post/put/delete
   }
 
+  deleteFournisseur(idFourn: any) {
+    this.fournisseurService.deleteFournisseur(idFourn).subscribe((response:any)=>{
+      console.log(response);
+      this.fournisseurs = this.fournisseurs.filter(f => {
+        return f.idFourn != idFourn;
+      });
+    });
+  }
+
 }

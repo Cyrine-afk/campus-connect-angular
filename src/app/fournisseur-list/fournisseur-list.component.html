@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
-    <!--<input [(ngModel)]="searchText" type="search" class="form-control" placeholder="Search"
-        style="margin: 10px auto; width: 50%;">!-->
+    <input type="search" class="form-control" placeholder="Search"
+        style="margin: 10px auto; width: 50%;">
 
     <table class="table table-light">
         <thead class="thead-light">
@@ -25,10 +25,13 @@
                 <td>{{f.emailFourn}}</td>
                 <td>
                     <button class="btn btn-warning" style="margin-right: 5px;"
-                        >Edit</button>
-                    <button class="btn btn-danger" >Delete</button>
+                    [routerLink]="['/edit-fournisseur',f.idFourn]">Edit
+                    </button>
+                    <button class="btn btn-danger" 
+                    (click)="deleteFournisseur(f.idFourn)">Delete</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+<router-outlet></router-outlet>

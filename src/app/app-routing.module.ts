@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FournisseurListComponent } from './fournisseur-list/fournisseur-list.component';
 import { AddFournisseurComponent } from './add-fournisseur/add-fournisseur.component';
+import { EditFournisseurComponent } from './edit-fournisseur/edit-fournisseur.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: "add-fournisseur",
     component: AddFournisseurComponent
+  },
+  {
+    path: 'edit-fournisseur/:idFourn', //the /:id is a dynamic id parameter
+    component: EditFournisseurComponent
   }
 ];
 

@@ -9,12 +9,16 @@ import { FournisseurListComponent } from './fournisseur-list/fournisseur-list.co
 import { FournisseurService } from './services/fournisseur/fournisseur.service';
 import { AddFournisseurComponent } from './add-fournisseur/add-fournisseur.component';
 import { FormsModule } from '@angular/forms';
+import { EditFournisseurComponent } from './edit-fournisseur/edit-fournisseur.component';
+import { FournisseurFilterPipePipe } from './fournisseur-filter-pipe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     FournisseurListComponent,
-    AddFournisseurComponent
+    AddFournisseurComponent,
+    EditFournisseurComponent,
+    FournisseurFilterPipePipe
   ],
   imports: [
     BrowserModule,

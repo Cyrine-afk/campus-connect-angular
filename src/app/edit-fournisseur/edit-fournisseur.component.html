@@ -2,11 +2,11 @@
 
     <div class="card" style="width: 50%;margin: 5px auto;">
         <div class="card-header">
-            Add New Fournisseur
+            Update Fournisseur
         </div>
-        <div class="card-body">
+        <div  class="card-body"  >
             <form>
-                <div class="form-group">
+                <div *ngIf="fournisseur" class="form-group">
                     <label for="name">Name</label>
                     <input [(ngModel)]="fournisseur.nomFourn" id="name" name="name" class="form-control" type="text">
                 </div>
@@ -30,19 +30,20 @@
                     <input [(ngModel)]="fournisseur.emailFourn" name="email" id="email" class="form-control" type="text">
                 </div>
 
-                <button class="btn btn-primary" (click)="saveFournisseur()" >Save</button>
+                <button class="btn btn-primary" (click)="editFournisseur()">Save Edit</button>
             </form>
         </div>
 
         <!-- Alert message when save is successful -->
         <div class="card-footer" *ngIf="showAlert" >
             <div class="alert alert-success" >
-                <button (click)="closeAlert()" class="close" [routerLink]="['/fournisseur-list']">
+                <button class="close" [routerLink]="['/fournisseur-list']">
                     &times; 
                 </button>
-                <strong>Fournisseur Successfully Saved</strong>
+                <strong>Fournisseur Successfully Updated</strong>
             </div>
         </div>
 
     </div>
 </div>
+
