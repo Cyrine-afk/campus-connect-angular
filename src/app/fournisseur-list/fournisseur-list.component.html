@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    <input type="search" class="form-control" placeholder="Search"
+    <input [(ngModel)]="searchTxt" type="search" class="form-control" placeholder="Search"
         style="margin: 10px auto; width: 50%;">
 
     <table class="table table-light">
@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let f of fournisseurs ">
+            <tr *ngFor="let f of fournisseurs | fournisseurFilterPipe:searchTxt">
                 <td>{{f.idFourn}}</td>
                 <td>{{f.nomFourn}}</td>
                 <td>{{f.matriculeFourn}}</td>

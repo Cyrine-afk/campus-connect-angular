@@ -10,6 +10,7 @@ import { FournisseurService } from '../services/fournisseur/fournisseur.service'
 export class FournisseurListComponent implements OnInit {
 
   fournisseurs!: Fournisseur[]; //to get the list of the fournisseurs in it
+  public searchTxt: Fournisseur['nomFourn'];
   constructor(private fournisseurService : FournisseurService) { } //calling external API from service API
 
   ngOnInit(): void {

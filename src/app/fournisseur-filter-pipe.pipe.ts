@@ -6,8 +6,17 @@ import { Fournisseur } from './model/fournisseur';
 })
 export class FournisseurFilterPipePipe implements PipeTransform {
 
-  transform(list: Fournisseur[], ...args: unknown[]): unknown {
-    return null;
+  transform(list: Fournisseur[], searchTxt:string): any {
+    if (!list)
+      return [];
+    if (!searchTxt)
+      return list;
+    searchTxt = searchTxt.toLocaleLowerCase();
+
+    list = list.filter(f => {
+      return f.nomFourn.toLocaleLowerCase().includes(searchTxt);
+    });
+    return list;
   }
 
 }
