@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { FournisseurListComponent } from './fournisseur-list/fournisseur-list.component';
 import { FournisseurService } from './services/fournisseur/fournisseur.service';
 import { AddFournisseurComponent } from './add-fournisseur/add-fournisseur.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AddFournisseurComponent } from './add-fournisseur/add-fournisseur.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [FournisseurService],
   bootstrap: [AppComponent]
