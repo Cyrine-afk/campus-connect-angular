@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InstructorDashboardRoutingModule } from './instructor-dashboard-routing.module';
-import { InstructorDashboardComponent } from './instructor-dashboard.component';
+import { FournisseurListComponent } from './fournisseur-list.component';
 
 import { FeatherIconModule } from 'src/app/shared/module/feather.module';
 import { SharedModule } from 'src/app/shared/module/shared.module';
 
 @NgModule({
   declarations: [
-    InstructorDashboardComponent
+    FournisseurListComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +18,6 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     SharedModule
   ],
   providers: [],
-  bootstrap: [InstructorDashboardComponent]
+  bootstrap: [FournisseurListComponent]
 })
 export class InstructorDashboardModule { }

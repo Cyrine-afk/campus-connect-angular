@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Fournisseur } from './model/fournisseur';
+import { Fournisseur } from './models/fournisseur';
 
 @Pipe({
   name: 'fournisseurFilterPipe'
