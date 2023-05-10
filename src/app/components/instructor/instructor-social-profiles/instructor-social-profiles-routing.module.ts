@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InstructorSocialProfilesComponent } from './instructor-social-profiles.component';
+import { AddFournisseurComponent } from './add-fournisseur.component';
 
-const routes: Routes = [{ path: '', component: InstructorSocialProfilesComponent }];
+const routes: Routes = [{ path: '', component: AddFournisseurComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

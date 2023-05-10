@@ -9,7 +9,7 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
 
 @NgModule({
   declarations: [
-    FournisseurListComponent
+    
   ],
   imports: [
     CommonModule,

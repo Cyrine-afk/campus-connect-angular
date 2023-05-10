@@ -4500,7 +4500,16 @@ export class DataService {
               last:'',
               subMenus: [],
             },
-            
+            {
+              menuValue: 'Stats NGOs',
+              route: routes.instructor_security,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'ngos',
+              page: 'stats-ngos',
+              last:'',
+              subMenus: [],
+            }
           ],
         },
       ],

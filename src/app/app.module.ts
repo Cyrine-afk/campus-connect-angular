@@ -9,11 +9,16 @@ import { FournisseurFilterPipePipe } from './fournisseur-filter-pipe.pipe';
 import { FormsModule } from '@angular/forms';
 import { FournisseurListComponent } from './components/instructor/instructor-dashboard/fournisseur-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AddFournisseurComponent } from './components/instructor/instructor-social-profiles/add-fournisseur.component';
+import { EditFournisseurComponent } from './components/instructor/instructor-payouts/edit-fournisseur.component';
 
 @NgModule({
   declarations: [AppComponent,
     FournisseurListComponent,
-    FournisseurFilterPipePipe],
+    FournisseurFilterPipePipe,
+    AddFournisseurComponent,
+    EditFournisseurComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
