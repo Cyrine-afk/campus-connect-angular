@@ -2,6 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexXAxis,ApexDataLabels,ApexTooltip,ApexStroke,ApexPlotOptions,ApexLegend,ApexYAxis,ApexFill,ApexGrid,ApexMarkers} from "ng-apexcharts";
 import { DataService } from 'src/app/shared/service/data/data.service';
 import { routes } from 'src/app/shared/service/routes/routes';
+import { DashboardService } from 'src/app/services/dashboardService.service';
+import { AssignedResponse } from 'src/app/models/assigned-response.model';
+import { map } from 'rxjs';
+import {userAssigned} from 'src/app/models/userAssigned.model'
+import { User } from 'src/app/models/user.model';
 export type ChartOptions = {
   series: ApexAxisChartSeries |any;
   chart: ApexChart |any;
@@ -15,6 +20,7 @@ export type ChartOptions = {
   legend: ApexLegend |any;
   grid: ApexGrid |any;
   markers: ApexMarkers |any;
+  
 };
 
 @Component({
@@ -28,12 +34,14 @@ export class InstructorDashboardComponent implements OnInit {
   public Areachart!: Partial<ChartOptions>;
   public ColumnCharts!: Partial<ChartOptions>;
   public bestSellingCourses : any = [];
+  public assignedResponses:any;
 
-  constructor(private DataService: DataService) {
+  constructor(private DataService: DataService,private dashboardService: DashboardService) {
     this.bestSellingCourses = this.DataService.bestSellingCourses;
     }
 
   ngOnInit(): void {
+    this.getChambersAndUsersAssigned();
     this.Areachart = {
       series: [
         {
@@ -136,5 +144,23 @@ export class InstructorDashboardComponent implements OnInit {
     }
     return series;
   }
+ 
+
+  getChambersAndUsersAssigned() {
+    this.dashboardService.getChambersAndUsersAssigned()
+      .pipe(
+        map((response: userAssigned[]) => response.map((item: userAssigned) => ({
+          id: item.id,
+          bloc: item.bloc
+        })))
+      )
+      .subscribe((response: any) => {
+        console.log(response);
+        this.assignedResponses = response;
+      });
+  }
+  
+  
+  
 
 }

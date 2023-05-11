@@ -1,25 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Fournisseur } from 'src/app/models/fournisseur';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FournisseurService {
 
-  readonly API_URL = 'http://localhost:3306';
-  
   constructor(private httpClient: HttpClient) { }
 
+  baseUrl = environment.API_BASE_URL;
+  readonly API_URL = 'http://localhost:8000';
+
   getAllFourniseurs() {
-    return this.httpClient.get(`${this.API_URL}/listFournisseur`)
+    return this.httpClient.get(this.baseUrl + "/listFournisseur");
   }
-  addFournisseur(Fournisseur : any) {
-    return this.httpClient.post(`${this.API_URL}/addFourn`, Fournisseur)
+  getFournisseur(id:any) {
+    return this.httpClient.get(`${this.API_URL}/getFournisseurSingle/${id}`);
+  }                                 
+  addFournisseur(Fournisseur: any) {
+    return this.httpClient.post(this.baseUrl+ "/addFourn", Fournisseur);
   }
   editFournisseur(Fournisseur : any, idFourn: any){
-    return this.httpClient.put(`${this.API_URL}/modifierFournisseur/${idFourn}`, Fournisseur)
-  }
+    return this.httpClient.put(`${this.API_URL}/modifierFournisseur/${idFourn}`, Fournisseur);
+  } 
   deleteFournisseur(idFourn : any){
-    return  this.httpClient.delete(`${this.API_URL}/deleteFournisseur/${idFourn}`)
+    return  this.httpClient.delete(`${this.API_URL}/deleteFournisseur/${idFourn}`);
+    // .toPromise()
+    // .then((response) => {
+    //   console.log('Fournisseur deleted successfully:', response);
+    //   return response;
+    // })
+    // .catch((error) => {
+    //   console.log('Error deleting fournisseur:', error);
+    //   throw error;
+    // });
+
+    //return  this.httpClient.delete(`${this.API_URL}/delete-product/${idProduct}`);
   }
+
 }

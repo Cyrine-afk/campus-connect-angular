@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/service/data/data.service';
 import { routes } from 'src/app/shared/service/routes/routes';
-import { PosteService } from 'src/app/shared/service/forum/poste.service';
-import { Post } from 'src/app/models/forum/post';
+import { PosteService } from 'src/app/services/poste.service';
+import { Post } from 'src/app/models/post';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs'; // <-- Importer le module rxjs ici
-import { Commentaire } from 'src/app/models/forum/commentaire';
-import { CommentaireService } from 'src/app/shared/service/forum/commentaire.service';
+import { Commentaire } from 'src/app/models/commentaire';
+import { CommentaireService } from 'src/app/services/commentaire.service';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Validators, Editor, Toolbar } from 'ngx-editor';
 
@@ -35,21 +35,21 @@ export class BlogDetailsComponent implements OnInit {
 
   constructor(private DataService: DataService,private P: PosteService, private route: ActivatedRoute , private commentaireService: CommentaireService) {
     this.blogDetailsRecentPosts = this.DataService.blogDetailsRecentPosts;
-    
+
     }
 
     form = new FormGroup({
       'Commentaire.contentCom': new FormControl('', Validators.required()),
-       /*editorContent*/ 
+       /*editorContent*/
     });
-  
-  
+
+
     onSubmitComment(comment: string) {
       this.comments.push(comment);
     }
-    
+
     ngOnInit(): void {
-      
+
 
       this.Commentaire = {
         idCom: null,
@@ -75,8 +75,8 @@ export class BlogDetailsComponent implements OnInit {
 
     }
 
-   
-   
+
+
 
 
   onAddComment(Commentaire: Commentaire, idPost: any) {
@@ -89,7 +89,7 @@ export class BlogDetailsComponent implements OnInit {
       console.log('Error adding comment', error);
     });
   }
-  
+
   getComments(idPost: any) {
     //this.getComments(this.Post.idPost);
 
@@ -100,5 +100,5 @@ export class BlogDetailsComponent implements OnInit {
     });
   }
 
- 
+
 }

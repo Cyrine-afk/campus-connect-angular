@@ -1,0 +1,48 @@
+
+<div class="container-fluid">
+
+    
+
+    <div style="display: flex; justify-content: space-between; align-items: center;" >  
+    
+    <table class="table table-light" id="tableFourn">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Email Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let n of ngos |  paginate : { itemsPerPage: tableSize, currentPage: page,totalItems: count };let i = index">
+               
+                <td>{{n.idNGO}}</td>
+                <td>{{n.nomNGO}}</td>
+                <td>{{n.descrNGO}}</td>
+                <td>{{n.numTelNGO}}</td>
+                <td>{{n.adrNGO}}</td>
+                <td>{{n.numTelNGO}}</td>
+                <td>
+                    <button class="btn btn-warning" style="margin-right: 5px;"
+                    >Edit
+                    </button>
+
+                    <button class="btn btn-danger"
+                    >Delete
+                    </button>
+
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+<pagination-controls
+    previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)" >
+</pagination-controls>
+<router-outlet></router-outlet>

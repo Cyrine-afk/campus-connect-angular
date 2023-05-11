@@ -1,0 +1,126 @@
+<div class="row">
+    <div class="col-md-4 d-flex">
+        <div class="card instructor-card w-100">
+            <div class="card-body">
+                <div class="instructor-inner">
+                    <h6>Total Partners</h6>
+                    <h4 class="instructor-text-success">7</h4>
+                    <p>From All Over Tunisia</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 d-flex">
+        <div class="card instructor-card w-100">
+            <div class="card-body">
+                <div class="instructor-inner">
+                    <h6>Products in stock</h6>
+                    <h4 class="instructor-text-info">7</h4>
+                    <p>Added by partners</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 d-flex">
+        <div class="card instructor-card w-100">
+            <div class="card-body">
+                <div class="instructor-inner">
+                    <h6>Products</h6>
+                    <h4 class="instructor-text-warning">3</h4>
+                    <p>Out of stock</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+            <div class="settings-inner-blk p-0">
+                <div class="sell-course-head comman-space">
+                    <h3>List of Partners</h3>
+                </div>
+
+                <div class="container-fluid">
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                                    <button class="btn btn-success" style="margin: 10px auto;"
+                                    (click)="onExportPdf()">
+                                        Generate PDF
+                                    </button>
+
+                                    <input [(ngModel)]="searchTxt" type="search" class="form-control" placeholder="Search"
+                                         style="margin: 10px auto; width: 50%;">
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;" >
+
+                    <table class="table table-light" id="tableFourn">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Matricule</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Email Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let f of fournisseurs | fournisseurFilterPipe:searchTxt | paginate : { itemsPerPage: tableSize, currentPage: page,totalItems: count };let i = index">
+
+                                <td>{{f.idFourn}}</td>
+                                <td>{{f.nomFourn}}</td>
+                                <td>{{f.matriculeFourn}}</td>
+                                <td>{{f.telFourn}}</td>
+                                <td>{{f.adrFourn}}</td>
+                                <td>{{f.emailFourn}}</td>
+                                <td>
+                                    <button class="btn btn-warning" style="margin-right: 5px;"
+                                    [routerLink]="['/instructor/instructor-payouts',f.idFourn]">Edit
+                                    </button>
+
+                                    <button class="btn btn-danger"
+                                    >Delete
+                                    </button>
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                  <table class="table table-nowrap mb-0">
+                    <thead>
+                    <tr>
+                      <th>ID Chamber</th>
+                      <th>BLOC Chamber</th>
+                      <th>View of Chamber</th>
+                    <tr>
+                    </thead>
+                    <tbody style="margin-left: 10px">
+                    <tr *ngFor="let response of assignedResponses">
+                      <td>{{response.id}}</td>
+                      <td>{{response.bloc}}</td>
+                      <td>
+                        <div class="image-container">
+                          <img src="https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2022/02/LONGITUDE-131-ULURU-AUSTRALIA.jpg?ssl=1" alt="Image" />
+
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+
+
+            </div>
+
+        <pagination-controls
+    previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)" >
+</pagination-controls>
+<router-outlet></router-outlet>
+

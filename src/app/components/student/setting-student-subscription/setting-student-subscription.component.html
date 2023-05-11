@@ -1,137 +1,214 @@
 <div class="settings-widget profile-details">
   <div class="settings-menu p-0">
-      <div class="profile-heading subscription-group d-flex align-items-center">
-          <div class="subscription-name">
-              <h3>My Subscriptions</h3>
-              <p>Here is list of package/product that you have subscribed.</p>
-          </div>
-          <div class="upgrade-now grad-border hvr-sweep-to-right">
-              <a [routerLink]="routes.page_pricing_plan" class="btn btn-primary">Upgrade Now — Go Pro $50.00</a>
-          </div>
+    <div class="profile-heading subscription-group d-flex align-items-center">
+      <div class="subscription-name">
+        <h3>My Subscriptions</h3>
+        <p>Here is list of package/product that you have subscribed.</p>
       </div>
-      <div class="monthly-subscribtion comman-space border-line">
-          <div class="monthly-group d-flex align-items-center">
-              <div class="subscribtion-active">
-                  <div class="active-btns">
-                      <button type="button" class="btn btn-success">Active</button>
-                  </div>
-                  <h5>Monthly </h5>
-                  <p>Subscription ID: #100010002</p>
+      <div class="upgrade-now grad-border hvr-sweep-to-right">
+        <a class="btn btn-primary " (click)="openAddForm()">Add Subscription</a>
+        <a [routerLink]="routes.page_pricing_plan" class="btn btn-primary">Upgrade Now — Go Pro $50.00</a>
+        
+        <div *ngIf="showAddForm" class="form-container">
+          <form *ngIf="showAddForm" (ngSubmit)="addSub()"  class="form">
+            <div class="row">
+              <div class="col">
+              <input [(ngModel)]="selectedSub.dateDebut" name="dateDebut" type="date" class="form-control">
+            </div>
+
+              <div class="col">
+              <input [(ngModel)]="selectedSub.dateFin" name="dateFin" type="date" class="form-control">
+            </div>
+            </div>
+            <div class="row">
+              <div class="col">
+              <input [(ngModel)]="selectedSub.prix" name="prix" type="number" class="form-control">
               </div>
-              <div class="active-change-plan grad-border hvr-sweep-to-right">
-                  <a [routerLink]="routes.page_pricing_plan" class="btn btn-primary">Change Plan</a>
+                <div class="col">
+                <p>Status Paiement </p>
+              <input [(ngModel)]="selectedSub.statusPaiement" name="statusPaiement" type="checkbox"> 
               </div>
-          </div>
-          <div class="month-plan-detail">
+              
+                <div class="col">
+                  <p>Etat Sante</p>
+              <input [(ngModel)]="selectedSub.etatSanteF" name="etatSanteF" type="checkbox">
+              </div>
+              </div>
               <div class="row">
-                <div class="col-xl-3 col-md-6 d-flex">
-                  <div class="bill-widget d-flex align-items-center">
-                    <div class="plan-icons">
-                      <i-feather name="calendar"></i-feather>
-                    </div>
-                    <div class="bill-name-group">
-                      <h5>Started On</h5>
-                      <p>Oct 1, 2022</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-2 col-md-6 d-flex">
-                  <div class="bill-widget d-flex align-items-center">
-                    <div class="plan-icons">
-                      <i-feather name="credit-card"></i-feather>
-                    </div>
-                    <div class="bill-name-group">
-                      <h5>Price</h5>
-                      <p>Monthly</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-md-6 d-flex">
-                  <div class="bill-widget d-flex align-items-center">
-                    <div class="plan-icons">
-                      <i-feather name="book-open"></i-feather>
-                    </div>
-                    <div class="bill-name-group">
-                      <h5>Access</h5>
-                      <p>Access All Courses</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 col-md-6 d-flex">
-                  <div class="bill-widget d-flex align-items-center">
-                    <div class="plan-icons">
-                      <i-feather name="calendar"></i-feather>
-                    </div>
-                    <div class="bill-name-group">
-                      <h5>Billing Date</h5>
-                      <p>Next Billing on Nov 1, 2022</p>
-                    </div>
-                  </div>
-                </div>
+                <div class="col">
+              <button type="submit" class=" btn btn-outline-success">Save</button>
               </div>
+                <div class="col">
+              <button type="button" (click)="closeAddForm()" class="btn btn-outline-secondary">Cancel</button>
             </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="monthly-subscribtion comman-space border-line" *ngFor="let sub of subs">
+      <div class="monthly-group d-flex align-items-center">
+
+        <div class="subscribtion-active">
+          
+          <div class="active-change-plan grad-border" *ngIf="sub.statusPaiement === false">
+            <button type="button" class="btn btn-danger">Inactive</button>
           </div>
-          <div class="monthly-subscribtion comman-space">
-            <div class="monthly-group d-flex align-items-center">
-              <div class="subscribtion-active">
-                <div class="active-btns">
-                  <button type="button" class="btn btn-danger">Expired</button>
-                </div>
-                <h5>Free Plan  </h5>
-                <p>Subscription ID: #100010002</p>
-              </div>
-              <div class="active-change-plan grad-border">
-                <button type="button" class="btn btn-default" >Disabled</button>
-              </div>
-            </div>
-            <div class="month-plan-detail">
+          <div class="active-btns" *ngIf="sub.statusPaiement === true">
+            <button type="button" class="btn btn-success">Active</button>
+          </div>
+          
+          <h5>Monthly </h5>
+          <p>Subscription ID: {{ sub.id }}</p>
+        </div>
+        <div class="active-change-plan grad-border hvr-sweep-to-right" >
+          <a (click)="deleteSub(selectedSub.id)" class="btn btn-primary">Delete</a>
+          <a class="btn btn-primary " (click)="openForm(selectedSub)">Edit</a>
+          <div *ngIf="showForm" class="form-container">
+            <form #myform *ngIf="showForm" (ngSubmit)="modifySub()"  class="form">
               <div class="row">
-                <div class="col-xl-3 col-md-6 d-flex">
-                  <div class="bill-widget d-flex align-items-center">
-                    <div class="plan-icons">
-                      <i-feather name="calendar"></i-feather>
-                    </div>
-                    <div class="bill-name-group">
-                      <h5>Started On</h5>
-                      <p>Oct 1, 2022</p>
-                    </div>
-                  </div>
+                <div class="col">
+                <input [(ngModel)]="selectedSub.dateDebut" name="dateDebut" type="date" class="form-control">
+              </div>
+
+                <div class="col">
+                <input [(ngModel)]="selectedSub.dateFin" name="dateFin" type="date" class="form-control">
+              </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                <input [(ngModel)]="selectedSub.prix" name="prix" type="number" class="form-control">
                 </div>
-                <div class="col-xl-2 col-md-6 d-flex">
-                  <div class="bill-widget d-flex align-items-center">
-                    <div class="plan-icons">
-                      <i-feather name="credit-card"></i-feather>
-                    </div>
-                    <div class="bill-name-group">
-                      <h5>Price</h5>
-                      <p>Monthly</p>
-                    </div>
-                  </div>
+                  <div class="col">
+                  <p>Status Paiement </p>
+                <input [(ngModel)]="selectedSub.statusPaiement" name="statusPaiement" type="checkbox"> 
                 </div>
-                <div class="col-xl-3 col-md-6 d-flex">
-                  <div class="bill-widget d-flex align-items-center">
-                    <div class="plan-icons">
-                      <i-feather name="book-open"></i-feather>
-                    </div>
-                    <div class="bill-name-group">
-                      <h5>Access</h5>
-                      <p>Access All Courses</p>
-                    </div>
-                  </div>
+                
+                  <div class="col">
+                    <p>Etat Sante</p>
+                <input [(ngModel)]="selectedSub.etatSanteF" name="etatSanteF" type="checkbox">
                 </div>
-                <div class="col-xl-4 col-md-6 d-flex">
-                  <div class="bill-widget d-flex align-items-center">
-                    <div class="plan-icons">
-                      <i-feather name="calendar"></i-feather>
-                    </div>
-                    <div class="bill-name-group">
-                      <h5>Billing Date</h5>
-                      <p>Next Billing on Nov 1, 2022</p>
-                    </div>
-                  </div>
                 </div>
+                <div class="row">
+                  <div class="col">
+                <button type="submit" class=" btn btn-outline-success" >Save</button>
+                </div>
+                  <div class="col">
+                <button type="button" (click)="closeForm()" class="btn btn-outline-secondary">Cancel</button>
+              </div>
+                </div>
+            </form>
+          </div>
+          <button type="button" class="btn btn-default" *ngIf="sub.statusPaiement === false">Disabled</button>
+        </div>
+      </div>
+      <div ng class="month-plan-detail">
+        <div class="row">
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="bill-widget d-flex align-items-center">
+              <div class="plan-icons">
+                <i-feather name="calendar"></i-feather>
+              </div>
+              <div class="bill-name-group">
+                <h5>Started On</h5>
+                <p>{{ sub.dateDebut | date: 'dd/MM/yyyy' }}</p>
               </div>
             </div>
           </div>
+          <div class="col-xl-2 col-md-6 d-flex">
+            <div class="bill-widget d-flex align-items-center">
+              <div class="plan-icons">
+                <i-feather name="credit-card"></i-feather>
+              </div>
+              <div class="bill-name-group">
+                <h5>Price</h5>
+                <p>{{sub.prix}} DT</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="bill-widget d-flex align-items-center">
+              <div class="plan-icons">
+                <i-feather name="book-open"></i-feather>
+              </div>
+              <div class="bill-name-group">
+                <h5>Status</h5>
+                <p>{{ sub.etatSanteF ? 'Clean' : 'Not clean' }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 d-flex">
+            <div class="bill-widget d-flex align-items-center">
+              <div class="plan-icons">
+                <i-feather name="calendar"></i-feather>
+              </div>
+              <div class="bill-name-group">
+                <h5>Billing Date</h5>
+                <p>{{ sub.dateFin | date: 'dd/MM/yyyy' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="monthly-subscribtion comman-space border-line"> 
+      <div class="subscribtion-active"><h5>Chambers Available</h5></div>
+      <div>
+        <button (click)="loadChambresDisponibles()" class="btn btn-outline-success">Show me the Chambers Available</button>
+        </div>
+      <div class="table-container">
+    <table class="chambers-table"  *ngIf="loadChambresDisponibles">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NomTC</th>
+          <th>PrixTC</th>
+          <th>Image du chambre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let chambre of chambresDisponible">
+          <tr>
+            <td>{{ chambre.id }}</td>
+            <td>{{ chambre.typeChambre.nomTC }}</td>
+            <td>{{ chambre.typeChambre.prixTC }}</td>
+            <td> <img src="https://aimvesting.com/composants/uploads/2017/04/PVCI_Hotel_el_Puerto_temoi_91236_hotel-el-puerto-chambre-3.jpg" > </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
+    <div class="monthly-subscribtion comman-space border-line"> 
+    <div class="subscribtion-active"><h5>Chambers Lower Than Price:</h5></div>
+    <div class="table-container">
+      <div class="input-container">
+        <input type="text" [(ngModel)]="maxPrice" class="input-field">
+        <button (click)="loadChambersLowerThanPrice()" class="button">Load Chambers</button>
+      </div>
+      <table class="chambers-table" *ngIf="maxPrice && showResultTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NomTC</th>
+            <th>PrixTC</th>
+            <th>Image du chambre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let chambre of chambersLowerThanPrice">
+            <td>{{ chambre.id }}</td>
+            <td>{{ chambre.typeChambre.nomTC }}</td>
+            <td>{{ chambre.typeChambre.prixTC }}</td>
+            <td> <img src="https://aimvesting.com/composants/uploads/2017/04/PVCI_Hotel_el_Puerto_temoi_91236_hotel-el-puerto-chambre-3.jpg" > </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+   <!-- Example dropdown filter -->
+
+  
+   
+    
+    </div>
 </div>

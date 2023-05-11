@@ -20,4 +20,5 @@ describe('SettingStudentSubscriptionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

@@ -26,18 +26,15 @@ export class routes {
   public static get error(): string {
     return this.baseUrl + '/error/';
   }
-  public static get home(): string {
-    return this.baseUrl + '/home';
-  }
-  public static get home2(): string {
-    return this.baseUrl + '/home-two';
-  }
+  
+ 
   public static get home3(): string {
     return this.baseUrl + '/home-three';
   }
-  public static get home4(): string {
-    return this.baseUrl + '/home-four';
+  public static get page_faq1(): string {
+    return this.home3 + 'faq';
   }
+ 
   // Instructor Routings
   public static get instructor_dashboard(): string {
     return this.instructor + 'instructor-dashboard';

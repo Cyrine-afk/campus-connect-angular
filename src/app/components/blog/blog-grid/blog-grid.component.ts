@@ -3,8 +3,8 @@ import { toHTML } from 'ngx-editor';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Validators, Editor, Toolbar } from 'ngx-editor';
 import { routes } from 'src/app/shared/service/routes/routes';
-import { PosteService } from 'src/app/shared/service/forum/poste.service';
-import { Post } from 'src/app/models/forum/post';
+import { PosteService } from 'src/app/services/poste.service';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-blog-list',
@@ -45,7 +45,7 @@ export class BlogGridComponent implements OnInit, OnDestroy {
 
   form = new FormGroup({
     'Post.content': new FormControl('', Validators.required()),
-     /*editorContent*/ 
+     /*editorContent*/
   });
 
   ngOnInit(): void {
@@ -71,11 +71,11 @@ export class BlogGridComponent implements OnInit, OnDestroy {
    this.Post.dateCreated = new Date();
     this.P.ajouterPost(Post).subscribe(() => {
       location.reload();
-
+      console.log(Post)
      this.P.getAllPosts();
       //this.form = false;
     });
-  }   
+  }
   onSubmit(nextIndex: number) {
   if (!this.Post.title || !this.Post.content) {
     alert("Veuillez remplir tous les champs !");
@@ -85,11 +85,11 @@ export class BlogGridComponent implements OnInit, OnDestroy {
   this.activeIndex = nextIndex;
 }
 
- 
 
 
 
-  
+
+
 
   ngOnDestroy(): void {
     this.editor.destroy();

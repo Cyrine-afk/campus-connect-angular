@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/service/data/data.service';
 import { routes } from 'src/app/shared/service/routes/routes';
-import { PosteService } from 'src/app/shared/service/forum/poste.service';
-import { Post } from 'src/app/models/forum/post';
+import { PosteService } from 'src/app/services/poste.service';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-instructor-reviews',
@@ -19,7 +19,7 @@ export class InstructorReviewsComponent implements OnInit {
 
   public listPosts : any= [];
   Post!: Post;
-  
+
 
 
   constructor(private DataService: DataService, private P: PosteService) {
@@ -68,7 +68,7 @@ export class InstructorReviewsComponent implements OnInit {
         });
       }
     }
-    
+
 
     sortBy() {
       switch (this.selected3) {
@@ -88,7 +88,7 @@ export class InstructorReviewsComponent implements OnInit {
       }
     }
 
-   
-    
+
+
 
 }

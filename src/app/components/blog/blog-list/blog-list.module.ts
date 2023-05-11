@@ -24,7 +24,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
   positionClass: 'toast-top-right', // Position de la notification
   progressBar: true, // Afficher une barre de progression
   closeButton: true, // Afficher un bouton de fermeture
-    })  
+    })
 
   ],
   providers: [ ToastrService],

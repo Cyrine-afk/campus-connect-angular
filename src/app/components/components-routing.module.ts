@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ComponentsComponent } from './components.component';
+import { TestBed } from '@angular/core/testing';
+
 
 const routes: Routes = [
   {
@@ -31,23 +33,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./student/student.module').then((m) => m.StudentModule),
       },
+
+
       {
-        path: 'home',
-        loadChildren: () =>
-          import('./home-list/home/home.module').then((m) => m.HomeModule),
+        path: 'home-three',
+        loadChildren: () => import('./home-list/home3/home3.module').then(m => m.Home3Module)
       },
-      { 
-        path: 'home-two', 
-        loadChildren: () => import('./home-list/home2/home2.module').then(m => m.Home2Module) 
-      },
-      { 
-        path: 'home-three', 
-        loadChildren: () => import('./home-list/home3/home3.module').then(m => m.Home3Module) 
-      },
-      { 
-        path: 'home-four', 
-        loadChildren: () => import('./home-list/home4/home4.module').then(m => m.Home4Module) 
-      },
+
     ],
   },
 ];

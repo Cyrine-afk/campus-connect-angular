@@ -3,6 +3,8 @@ import { DataService } from 'src/app/shared/service/data/data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import { routes } from 'src/app/shared/service/routes/routes';
+import { PlatService } from 'src/app/services/Restaurant/plat.service';
+import { Plat } from 'src/app/models/plat';
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -28,8 +30,12 @@ export class CourseListComponent implements OnInit {
   public totalPages: number = 0;
   public courseList: any = [];
   public latestCourses: any = [];
+  public nomPlat!: string;
+  public plat!: Plat;
+searchTerm: any;
+  public nutritionInformation!: any;
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private ps: PlatService) {
     // this.courseList = this.data.courseList;
     this.latestCourses = this.data.latestCourses;
   }
@@ -37,6 +43,22 @@ export class CourseListComponent implements OnInit {
   ngOnInit(): void {
     this.getcourseList();
   }
+
+
+  public onSearch(searchDataValue : any) {
+    this.ps.getPlatNutritionInformation(searchDataValue)
+      .subscribe((plat: Plat) => {
+        this.plat = plat;
+        console.log(this.searchDataValue);
+
+      });
+  }
+  public searchData(value: any): void {
+    this.dataSource.filter = value.trim().toLowerCase();
+    this.courseList = this.dataSource.filteredData;
+  }
+
+
   private getcourseList(): void {
     this.courseList = [];
     this.serialNumberArray = [];
@@ -55,7 +77,7 @@ export class CourseListComponent implements OnInit {
     this.calculateTotalPages(this.totalData, this.pageSize);
     });
 
- 
+
   }
   public sortData(sort: Sort) {
     const data = this.courseList.slice();
@@ -71,10 +93,7 @@ export class CourseListComponent implements OnInit {
     }
   }
 
-  public searchData(value: any): void {
-    this.dataSource.filter = value.trim().toLowerCase();
-    this.courseList = this.dataSource.filteredData;
-  }
+
 
 public getMoreData(event: string): void {
     if (event == 'next') {

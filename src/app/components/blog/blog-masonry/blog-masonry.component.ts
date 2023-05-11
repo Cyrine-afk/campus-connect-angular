@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/service/data/data.service';
 import { routes } from 'src/app/shared/service/routes/routes';
-import { PosteService } from 'src/app/shared/service/forum/poste.service';
-import { Post } from 'src/app/models/forum/post';
+import { PosteService } from 'src/app/services/poste.service';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-blog-masonry',

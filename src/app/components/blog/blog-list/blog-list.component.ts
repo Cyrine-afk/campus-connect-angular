@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/service/data/data.service';
-import { PosteService } from 'src/app/shared/service/forum/poste.service';
-import { Post } from 'src/app/models/forum/post';
+import { PosteService } from 'src/app/services/poste.service';
+import { Post } from 'src/app/models/post';
 import { Router } from '@angular/router';
 import { routes } from 'src/app/shared/service/routes/routes';
 import { ToastrService } from 'ngx-toastr';
+
+
+
+
+
+
+
 
 @Component({
   selector: 'app-blog-list',
@@ -20,7 +27,7 @@ export class BlogListComponent implements OnInit {
   //public searchResults : any=[];
   searchKeyword: string = '';
 
-  
+
 
 
   public blogListRecentPosts : any = [];
@@ -60,7 +67,7 @@ export class BlogListComponent implements OnInit {
 
 
         }
-  }  
+  }
    getAllPosts(){
     console.log('Calling API to get all posts...'); //console.log
 
@@ -73,16 +80,16 @@ export class BlogListComponent implements OnInit {
       }
 
 
-  
+
     showMore1(post: any) {
 
       console.log('Clicked on "Read More" button:', post);
-    
+
       const idPost = post.idPost;
-    
+
       if (idPost) {
         console.log('Post ID:', idPost);
-    
+
         this.router.navigate(['/blog-details', idPost, { showFullContent: true }]);
        // this.showFullContent = true;
 
@@ -90,12 +97,12 @@ export class BlogListComponent implements OnInit {
         console.error('Cannot navigate to blog details. Post ID is undefined or null.');
       }
     }
-    
+
 
     hidePost(P: Post) {
       P.hidden = true;
     }
-    
+
 
     onSearch(keyword: string) {
       this.P.search(keyword).subscribe(
@@ -130,7 +137,7 @@ export class BlogListComponent implements OnInit {
         this.listPosts[index] = updatedPost;
       });
     }*/
-    
+
     likePost(postId: number): void {
       this.P.likePost(postId).subscribe(updatedPost => {
         const index = this.listPosts.findIndex((p: Post) => p.idPost === postId);
@@ -138,10 +145,9 @@ export class BlogListComponent implements OnInit {
       });
     }
 
-  
 
-    
+
+
 
 }
 
- 

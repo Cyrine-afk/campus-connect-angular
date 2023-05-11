@@ -4320,49 +4320,126 @@ export class DataService {
   public sideBar: any = [
     {
       tittle: 'Home',
-      base: 'home',
-      base2:'home-two',
       base3:'home-three',
-      base4:'home-four',
       showAsTab: false,
       separateRoute: false,
       route: 'javascript:;',
       menu: [
+        
+       
         {
-          menuValue: 'Home',
-          route: routes.home,
-          hasSubRoute: false,
-          showSubRoute: false,
-          base: 'home',
-          subMenus: [],
-        },
-        {
-          menuValue: 'Home Two',
-          route: routes.home2,
-          hasSubRoute: false,
-          showSubRoute: false,
-          base: 'home-two',
-          subMenus: [],
-        },
-        {
-          menuValue: 'Home Three',
+          menuValue: 'Landing page',
           route: routes.home3,
           hasSubRoute: false,
           showSubRoute: false,
           base: 'home-three',
           subMenus: [],
         },
+      
+          {
+            menuValue: 'Dashboard',
+            route: routes.instructor_dashboard,
+            hasSubRoute: false,
+            showSubRoute: false,
+            base: 'instructor',
+            page: 'instructor-dashboard',
+            last: '',
+            subMenus: [],
+          },
+      
+      ],
+      
+    },
+
+    {
+      tittle: 'Dorm',
+      base:'dorm',
+      showAsTab: false,
+      separateRoute: false,
+      route: 'javascript:;',
+      menu: [       
         {
-          menuValue: 'Home Four',
-          route: routes.home4,
+          menuValue: 'rooms',
+          route: routes.students_subscription,
           hasSubRoute: false,
           showSubRoute: false,
-          base: 'home-four',
+          base: 'rooms',
           subMenus: [],
         },
+       
+      ],
+    },{
+      tittle: 'Restaurant',
+      base:'Menu',
+      showAsTab: false,
+      separateRoute: false,
+      route: 'javascript:;',
+      menu: [       
+        {
+          menuValue: 'Menu',
+          route: routes.page_course_list,
+          hasSubRoute: false,
+          showSubRoute: false,
+          base: 'menu',
+          subMenus: [],
+        },
+       
       ],
     },
     {
+      tittle: 'Events',
+      base:'event',
+      showAsTab: false,
+      separateRoute: false,
+      route: 'javascript:;',
+      menu: [       
+        {
+          menuValue: 'event',
+          route: routes.comming_soon,
+          hasSubRoute: false,
+          showSubRoute: false,
+          base: 'event',
+          subMenus: [],
+        },
+       
+      ],
+    },{
+      tittle: 'Impact',
+      base:'NGOs',
+      showAsTab: false,
+      separateRoute: false,
+      route: 'javascript:;',
+      menu: [       
+        {
+          menuValue: 'ngos',
+          route: routes.instructor_grid,
+          hasSubRoute: false,
+          showSubRoute: false,
+          base: 'ngo s',
+          subMenus: [],
+        },
+       
+      ],
+    },
+    {
+      tittle: 'Forum',
+      base:'forum',
+      showAsTab: false,
+      separateRoute: false,
+      route: 'javascript:;',
+      menu: [       
+        {
+          menuValue: 'Forum',
+          route: routes.blog_masonry,
+          hasSubRoute: false,
+          showSubRoute: false,
+          base: 'Forum',
+          subMenus: [],
+        },
+       
+      ],
+    },
+    /*{
       tittle: 'Instructor',
       base: 'instructor',
       showAsTab: false,
@@ -4974,7 +5051,7 @@ export class DataService {
           subMenus: [],
         },
       ],
-    },
+    },*/
   ];
   public Instructor_sideBar: any = [
 
@@ -4991,6 +5068,13 @@ export class DataService {
         },
         {
           menuValue: 'My Courses',
+          route: routes.instructor_course,
+          icon: 'book',
+          base: 'instructor-course',
+          subMenus: [],
+        },
+        {
+          menuValue: 'My Campus Connect',
           route: routes.instructor_course,
           icon: 'book',
           base: 'instructor-course',
@@ -5098,7 +5182,7 @@ export class DataService {
         },
         {
           menuValue: 'Sign Out',
-          route: routes.home,
+          route: routes.home3,
           icon: 'power',
           base: '',
           subMenus: [],

@@ -6,6 +6,8 @@ import { AddCourseComponent } from './add-course.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from 'src/app/shared/module/shared.module';
+import {AuthInterceptor} from "./auth.interceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,7 +19,11 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     NgxEditorModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
 export class AddCourseModule { }
