@@ -49,6 +49,13 @@ const routes: Routes = [
             (m) => m.CourseWishlistModule
           ),
       },
+      {
+        path: 'edit',
+        loadChildren: () =>
+          import('./edit-course/edit-course.module').then(
+            (m) => m.EditCourseModule
+          ),
+      },
     ],
   },
   { path: 'course-lesson', loadChildren: () => import('./course-lesson/course-lesson.module').then(m => m.CourseLessonModule) },

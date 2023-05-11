@@ -7,6 +7,8 @@ const routes: Routes = [
     path: '',
     component: PagesComponent,
     children: [
+     
+
       {
         path: 'cart',
         loadChildren: () =>
@@ -22,6 +24,23 @@ const routes: Routes = [
         loadChildren: () =>
           import('./course/course.module').then((m) => m.CourseModule),
       },
+      {
+        path: 'depense',
+        loadChildren: () =>
+          import('./depenses/depenses.module').then((m) => m.DepensesModule),
+      },
+      {
+        path: 'projet',
+        loadChildren: () =>
+          import('./projets/projets.module').then((m) => m.ProjetsModule),
+      },
+      {
+        path: 'frais-inscription',
+        loadChildren: () =>
+          import('./frais-inscription/frais-inscription.module').then((m) => m.FraisInscriptionModule),
+      },
+    
+
 
       {
         path: 'faq',

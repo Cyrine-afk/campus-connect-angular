@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { routes } from 'src/app/shared/service/routes/routes';
+
 @Component({
   selector: 'app-come-soon',
   templateUrl: './come-soon.component.html',

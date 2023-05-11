@@ -1,0 +1,67 @@
+<section class="page-content course-sec">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="add-course-header" style="padding: 20px;">
+            <h2>Edit Depense</h2>
+            <div class="add-course-btns">
+              <ul class="nav">
+                <li>
+                  <a [routerLink]="routes.dashboard_instructor" class="btn btn-black">Back to Depenses</a>
+                </li>
+                <li>
+                  <a href="javascript:;" class="btn btn-success-dark" (click)="addDepense()">Save</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <!-- Course Wizard -->
+            <div class="widget-set">
+         
+              <div class="widget-content multistep-form">
+                <fieldset id="first" [ngStyle]="{'display': activeIndex === 0 ? 'block' : (activeIndex ? 'none' : null) }">
+                  <div class="add-course-info mat-style" style="padding: 20px;">
+                    <div class="add-course-inner-header">
+                      <h4>Depenses Information</h4>
+                    </div>
+                    <div class="add-course-form">
+                      <form action="#">
+                        <div class="form-group">
+                          <label class="add-course-label">Consomation d'eau</label>
+                          <input type="number" name="Consommationeau" [(ngModel)]="depense.consommationeau" class="form-control" placeholder="consomation eau" />
+                        </div>
+                        <div class="form-group">
+                            <label class="add-course-label">Consomation d'electricite</label>
+                         
+                          <input type="number" name="Consommationelectricite" [(ngModel)]="depense.consommationelectricite"  class="form-control" placeholder="consomation electricite" />
+                          </div>
+                          <div class="form-group">
+                            <label class="add-course-label">Maintenance restaurant</label>
+                            <input type="number" class="form-control" name="maintenanceRestaurant" [(ngModel)]="depense.maintenanceRestaurant" placeholder="Maintenance restaurant" />
+                          </div>
+                          <div class="form-group">
+                            <label class="add-course-label">Salaire</label>
+                            <input type="number" class="form-control" name="salaireProf" [(ngModel)]="depense.salaireProf" placeholder="Salaire" />
+                          </div>
+                      
+                   
+                      </form>
+                    </div>
+           
+                  </div>
+                </fieldset>
+            
+              </div>
+            </div>
+            <!-- /Course Wizard -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+

@@ -3,6 +3,9 @@ import { toHTML } from 'ngx-editor';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Validators, Editor, Toolbar } from 'ngx-editor';
 import { routes } from 'src/app/shared/service/routes/routes';
+import { ReclamationService } from 'src/app/shared/service/reclamation/reclamation.service';
+import { Reclamtion } from 'src/app/models/reclamation';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-course',
@@ -27,6 +30,15 @@ export class AddCourseComponent implements OnInit, OnDestroy {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
+  reclamation = new Reclamtion()
+
+  constructor(
+    private reclamationService : ReclamationService,
+    private router : Router
+  ) { 
+
+  }
+
   form = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
   });
@@ -43,6 +55,16 @@ export class AddCourseComponent implements OnInit, OnDestroy {
     this.activeIndex = index
   }
 
+  addReclamation(){
+    this.reclamation.idRec = 0
+    this.reclamation.contenuRec = this.reclamation.contenuRec.content[0].content[0].text
+    console.log(this.reclamation)
+    this.reclamationService.postReclamation(this.reclamation).subscribe(res=>{
+      this.reclamation = new Reclamtion()
+      this.router.navigateByUrl("pages/course/course-list")
+    })
+  }
+  
   public onBack(index:number){
     this.activeIndex = index
 

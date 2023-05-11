@@ -3,6 +3,9 @@ import { DataService } from 'src/app/shared/service/data/data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import { routes } from 'src/app/shared/service/routes/routes';
+import { ReclamationService } from 'src/app/shared/service/reclamation/reclamation.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -13,9 +16,12 @@ export class CourseListComponent implements OnInit {
   selected ='1';
   public searchDataValue = '';
   dataSource!: MatTableDataSource<any>;
+  repondre : any
+  valeur : any
 
   // pagination variables
   public lastIndex: number = 0;
+  public reclamations : any
   public pageSize: number = 10;
   public totalData: any = 0;
   public skip: number = 0;
@@ -29,14 +35,89 @@ export class CourseListComponent implements OnInit {
   public courseList: any = [];
   public latestCourses: any = [];
 
-  constructor(private data: DataService) {
+  constructor(
+    private data: DataService,
+    private reclamationService : ReclamationService,
+    private router : Router,
+    private http : HttpClient
+    ) {
     // this.courseList = this.data.courseList;
     this.latestCourses = this.data.latestCourses;
   }
 
   ngOnInit(): void {
     this.getcourseList();
+    this.getReclamationList()
   }
+
+  getReclamationList() :void {
+    this.reclamationService.getReclamation().subscribe(res=>{
+      this.reclamations = res
+      console.log(this.reclamations)
+    })
+  }
+
+
+filtre(event :any)
+{
+  this.reclamationService.getReclamation().subscribe(res=>{
+    this.reclamations = res
+    console.log(this.reclamations)
+    if(event.target.value !== "ALL"){
+      console.log(event)
+  this.reclamations = this.reclamations.filter((i:any)=>{
+
+    return i.type == event.target.value
+  })
+    }
+
+  })}
+  
+  
+  pdf(reclamation:any){
+ this.http.get("http://localhost:8089/pdf" ,{ responseType: 'blob' } )
+    .subscribe(
+         data => {
+            var file = new Blob([data], {type: 'application/pdf'});
+            var fileURL = URL.createObjectURL(file);
+            window.open(fileURL);
+         }
+     );
+  }
+  goToEdit(data : any){
+    const url = 'pages/course/edit/'+data.idRec
+    this.router.navigateByUrl(url)
+  }
+
+  nbReclamation(){
+    this.http.get('http://localhost:8089/reclamation/nombresReclamationAujourdhui').subscribe(res=>{
+      this.valeur = res
+    })
+  } 
+
+  delete(rec : any){
+    if(confirm('did you want to delete this reclamation ?')){
+      this.reclamationService.delete(rec.idRec).subscribe(res=>{
+        this.getReclamationList()
+        alert('OK')
+      },err => {
+        alert('Error server')
+      })
+    }
+  }
+
+  reply(rec : any){
+    const obj = {
+      "description": this.repondre,
+      "idResponse": rec.idRec
+    }
+    this.reclamationService.postRepondre(obj , rec.idRec).subscribe(res=>{
+      this.repondre = null
+      this.getReclamationList()
+    })
+  }
+
+
   private getcourseList(): void {
     this.courseList = [];
     this.serialNumberArray = [];

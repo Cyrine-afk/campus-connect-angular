@@ -6,9 +6,9 @@
                 <div class="breadcrumb-list">
                     <nav aria-label="breadcrumb" class="page-breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a [routerLink]="routes.home3">Home</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Courses</li>
-                            <li class="breadcrumb-item active" aria-current="page">All Courses</li>
+                            <li class="breadcrumb-item"><a [routerLink]="routes.home">Home</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Reclamation</li>
+                            <li class="breadcrumb-item active" aria-current="page"></li>
                         </ol>
                     </nav>
                 </div>
@@ -22,17 +22,14 @@
 <section class="course-content">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-12">
 
                 <!-- Filter -->
                 <div class="showing-list">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="d-flex align-items-center">
-                                <div class="view-icons">
-                                    <a [routerLink]="routes.page_course_grid" class="grid-view"><i-feather name="grid"></i-feather></a>
-                                    <a [routerLink]="routes.page_course_list" class="list-view active"><i-feather name="list"></i-feather></a>
-                                </div>
+                                
                                 <div class="show-result">
                                     <h4>Showing {{ serialNumberArray[0] }}-{{ serialNumberArray[serialNumberArray.length - 1] }} of 50 results</h4>
                                 </div>
@@ -43,23 +40,16 @@
                                 <form action="#">
                                     <div class="row gx-2 align-items-center">
                                         <div class="col-md-6 col-item">
-                                            <div class=" search-group">
-                                              <i-feather name="search"></i-feather>
-                                                <input type="text" 
-                                                [(ngModel)]="searchDataValue"
-                                                 name="one"
-                                                (ngModelChange)="searchData(searchDataValue)" 
-                                                class="form-control" placeholder="Search our courses" >
-                                            </div>
+                                           <button class="btn btn-primary" (click)="nbReclamation()" data-bs-toggle="modal" data-bs-target="#exampleModal" >Réclamtion d'aujourduit</button>
                                         </div>
-                                        <div class="col-md-6 col-lg-6 col-item">
+                                        <div class="col-md-4 col-lg-4 col-item">
                                             <div class="form-group select-form mb-0">
-                                                <mat-select class="form-select select" name="sellist1"  [(value)]="selected">
-                                                    <mat-option value="1">Newly published</mat-option>
-                                                    <mat-option value="angular">Angular</mat-option>
-                                                    <mat-option value="nodejs">Node Js</mat-option>
-                                                    <mat-option value="react">React</mat-option>
-                                                  </mat-select>
+                                                <select class="form-select "  (change)="filtre($event)" name="sellist1"  >
+                                                    <option value="ALL">ALL</option>
+                                                    <option value="SOFTWARE">SOFTWARE</option>
+                                                    <option value="USER">USER</option>
+                                                    <option value="OTHER">OTHER</option>
+                                                  </select>
                                             </div>
                                         </div>
                                     </div>
@@ -71,54 +61,66 @@
                 <!-- /Filter -->
 
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 d-flex" *ngFor="let data of courseList">
+                    <div class="col-lg-12 col-md-12 d-flex" *ngFor="let reclamation of reclamations">
                         <div class="course-box course-design list-course d-flex">
                             <div class="product">
-                                <div class="product-img">
-                                    <a [routerLink]="routes.page_course_details">
-                                        <img class="img-fluid" alt="" [src]="data.img1">
-                                    </a>
-                                    <div class="price">
-                                        <h3>{{data.amount1}} <span>{{data.amount2}}</span></h3>
-                                    </div>
-                                </div>
+                               
                                 <div class="product-content">
                                     <div class="head-course-title">
-                                        <h3 class="title"><a [routerLink]="routes.page_course_details">{{data.content1}}</a></h3>
-                                        <div class="all-btn all-category d-flex align-items-center">
-                                            <a [routerLink]="routes.page_checkout" class="btn btn-primary">{{data.content2}}</a>
+                                        <h3 class="title"><a >{{reclamation.type}}</a></h3>
+                                        <h3 class="title"><a style="color: green; " *ngIf="reclamation.etat == 'traité'"> {{reclamation.etat}}</a></h3>
+                                        <h3 class="title"><a style="color: red; " *ngIf="reclamation.etat !== 'traité'"> {{reclamation.etat}}</a></h3>
+                                        <div style="margin-left: auto; margin-right : 0px;">
+
+                                            <div class="all-btn all-category d-flex align-items-center">
+                                              
+                                                <a (click)="delete(reclamation)"  class="btn btn-primary">
+                                                    Delete
+                                                </a>
+                                            </div>
+                                            <div class="all-btn all-category d-flex align-items-center">
+                                              
+                                                <a (click)="pdf(reclamation)"  class="btn btn-primary">
+                                                    Pdf
+                                                </a>
+                                            </div>
+    
+                                            <div style="margin-top: 5px;" class="all-btn all-category d-flex align-items-center">
+                                                <a (click)="goToEdit(reclamation)" class="btn btn-primary">
+                                                    Edit
+                                                </a>
+                                             
+                                        </div>
                                         </div>
                                     </div>
                                     <div class="course-info border-bottom-0 pb-0 d-flex align-items-center">
-                                        <div class="rating-img d-flex align-items-center">
-                                            <img [src]="data.img2" alt="">
-                                            <p>{{data.lesson}}</p>
-                                        </div>
-                                        <div class="course-view d-flex align-items-center">
-                                            <img [src]="data.img3" alt="">
-                                            <p>{{data.time}}</p>
+                                    
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" style="width : 40px"  alt="">
+                                            <p>{{reclamation.sendingDate}}</p>
                                         </div>
                                     </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star filled me-1"></i>
-                                        <i class="fas fa-star filled me-1"></i>
-                                        <i class="fas fa-star filled me-1"></i>
-                                        <i class="fas fa-star filled me-1"></i>
-                                        <i class="fas fa-star me-1"></i>
-                                        <span class="d-inline-block average-rating"><span>{{data.rating1}}</span> {{data.rating2}}</span>
-                                    </div>
+                                  
                                     <div class="course-group d-flex mb-0">
                                         <div class="course-group-img d-flex">
-                                            <a [routerLink]="routes.instructor_instructor_profile"><img [src]="data.img4" alt="" class="img-fluid"></a>
-                                            <div class="course-name">
-                                                <h4><a [routerLink]="routes.instructor_instructor_profile">{{data.name}}</a></h4>
-                                                <p>{{data.role}}</p>
+                                            <div class="course-name" style="padding: 20px;">
+                                                <p>{{reclamation.contenuRec}}</p>
                                             </div>
                                         </div>
-                                        <div class="course-share d-flex align-items-center justify-content-center">
-                                            <a href="javascript:void(0)"><i class="fa-heart" (click)="toggleClass(data)" [ngClass]="data.active ? 'fa-solid' : 'fa-regular'"></i></a>
-                                        </div>
+                                      
                                     </div>
+                                    <div  style="padding: 20px; " class="row">
+                                        <div class="col-10" >
+                                            <input type="text" [(ngModel)]="repondre" style="height: 55px; width: 100%; border-radius: 50px;" class="form-control" placeholder="Répondre" />
+                                        </div>
+                                        <div style="margin-left: 20px;" class="col-1">
+                                            <div  class="all-btn-success all-category d-flex align-items-center">
+                                                <a (click)="reply(reclamation)" class="btn btn-primary"style="border-color:#198754; color: #198754; " id="saveBtn" >
+                                                    Save
+                                                </a>
+                                            </div>
+                                        </div>
+                                      </div>
                                 </div>
                             </div>
                         </div>
@@ -156,174 +158,23 @@
                 <!-- /pagination -->
 
             </div>
-            <div class="col-lg-3 theiaStickySidebar">
-                <div class="stickybar">
-                <div class="filter-clear">
-                    <div class="clear-filter d-flex align-items-center">
-                        <h4><i-feather name="filter"></i-feather>Filters</h4>
-                        <div class="clear-text">
-                            <p>CLEAR</p>
-                        </div>
-                    </div>
-
-                    <!-- Search Filter -->
-                    <div class="card search-filter categories-filter-blk">
-                        <div class="card-body">
-                            <div class="filter-widget mb-0">
-                                <div class="categories-head d-flex align-items-center">
-                                    <h4>Course categories</h4>
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      Backend (3)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      CSS (2)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      Frontend (2)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      General (2)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      IT & Software (2)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      Photography (2)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      Programming Language (3)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      Technology (2)
-                                    </label>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Search Filter -->
-
-                    <!-- Search Filter -->
-                    <div class="card search-filter">
-                        <div class="card-body">
-                            <div class="filter-widget mb-0">
-                                <div class="categories-head d-flex align-items-center">
-                                    <h4>Instructors</h4>
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      Keny White (10)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      Hinata Hyuga (5)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      John Doe (3)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input input-box" type="checkbox" name="select_specialist" />
-                                      Nicole Brown
-                                    </label>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Search Filter -->
-
-                    <!-- Search Filter -->
-                    <div class="card search-filter ">
-                        <div class="card-body">
-                            <div class="filter-widget mb-0">
-                                <div class="categories-head d-flex align-items-center">
-                                    <h4>Price</h4>
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input radio-box" type="checkbox" name="select_specialist" />
-                                      All (18)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input radio-box" type="checkbox" name="select_specialist" />
-                                      Free (3)
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input radio-box" type="checkbox" name="select_specialist" />
-                                      Paid (15)
-                                    </label>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Search Filter -->
-
-                    <!-- Latest Posts -->
-                    <div class="card post-widget ">
-                        <div class="card-body">
-                            <div class="latest-head">
-                                <h4 class="card-title">Latest Courses</h4>
-                            </div>
-                            <ul class="latest-posts">
-                                <li *ngFor="let data of latestCourses">
-                                    <div class="post-thumb">
-                                        <a [routerLink]="routes.page_course_details">
-                                            <img class="img-fluid" [src]="data.img" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="post-info" [ngClass]="{'free-color': data.content2 === 'FREE' }"  >
-                                        <h4>
-                                            <a [routerLink]="routes.page_course_details">{{data.content1}}</a>
-                                        </h4>
-                                        <p>{{data.content2}}</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /Latest Posts -->
-
-                </div>
-            </div>
-            </div>
+           
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+        
+            <div class="modal-body">
+               <div >
+                <p style="font: size 40px ; font-weight: bold;">
+                    Le nombre de réclamtion d'aujourd'huit = <span style="font-weight: bold ; color: grey;">{{valeur}}</span> 
+                </p>
+               </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
 </section>
 <!-- /Course -->

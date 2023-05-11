@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 
 
-
+//routetag
 export class routes {
   private static Url = '';
 
@@ -26,26 +26,18 @@ export class routes {
   public static get error(): string {
     return this.baseUrl + '/error/';
   }
-  
- 
+  public static get home(): string {
+    return this.baseUrl + '/home';
+  }
+  public static get home2(): string {
+    return this.baseUrl + '/home-two';
+  }
   public static get home3(): string {
     return this.baseUrl + '/home-three';
   }
-  public static get page_faq1(): string {
-    return this.home3 + 'faq';
+  public static get home4(): string {
+    return this.baseUrl + '/home-four';
   }
-
-
-   // Stock Module Routings
-   public static get stock(): string {
-    return this.baseUrl + '/partners/';
-  }
-  public static get fournisseur(): string {
-    return this.stock + 'fournisseur-view';
-  }
-
-  
- 
   // Instructor Routings
   public static get instructor_dashboard(): string {
     return this.instructor + 'instructor-dashboard';
@@ -240,6 +232,37 @@ export class routes {
   }
   public static get page_add_course(): string {
     return this.pages + 'course/add-course';
+  }
+  public static get page_add_depence(): string {
+    return this.pages + 'depense/add-depense';
+  }
+
+  public static get page_list_depence(): string {
+    return this.pages + 'depense/list-depense';
+  }
+
+  public static get page_edit_depence(): string {
+    return this.pages + 'depense/edit-depense/:id';
+  }
+
+  public static get page_add_projets(): string {
+    return this.pages + 'projet/add-projet';
+  }
+  public static get page_list_projets(): string {
+    return this.pages + 'projet/list-projet';
+  }
+  public static get page_edit_projets(): string {
+    return this.pages + 'projet/edit-projet/:id';
+  }
+
+  public static get page_add_frais_inscri(): string {
+    return this.pages + 'frais-inscription/add-frais-inscription';
+  }
+  public static get page_list_frais_inscri(): string {
+    return this.pages + 'frais-inscription/list-frais-inscription';
+  }
+  public static get page_depence_list(): string {
+    return this.pages + 'course/course-list';
   }
   public static get page_term_condition(): string {
     return this.pages + 'term-condition';

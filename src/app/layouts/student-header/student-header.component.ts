@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { CommonService } from 'src/app/shared/service/common/common.service';
 import { DataService } from 'src/app/shared/service/data/data.service';
 import { SidebarService } from 'src/app/shared/service/sidebar/sidebar.service';
 import { routes } from 'src/app/shared/service/routes/routes';
-import { CommonService } from 'src/app/shared/service/common/common.service';
-import { Inject } from '@angular/core';
-
 
 @Component({
   selector: 'app-student-header',

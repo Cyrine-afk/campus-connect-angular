@@ -12,31 +12,30 @@ export class HomeData {
             id:1,
             class:'text-blue',
             counter:10,
-            title:'Rooms',
+            title:'Online Courses',
             end:'K'
         },
         {
             id:2,
             class:'text-yellow',
             counter:200,
-            title:'Menus',
+            title:'Expert Tutors',
             end:'+'
         },
         {
             id:3,
             class:'text-info',
-            counter:100,
-            title:'NGOs',
+            counter:6,
+            title:'Ceritified Courses',
             end:'K+'
         },
         {
             id:4,
             class:'text-green',
-            counter:500,
-            title:'Events',
+            counter:60,
+            title:'Online Students',
             end:'K +'
         },
-       
     ]
     public favourite = [
        {

@@ -28,11 +28,6 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "strictTemplates": true
   }
 }
-
-
-

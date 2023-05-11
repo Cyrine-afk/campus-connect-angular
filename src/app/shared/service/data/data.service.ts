@@ -6,6 +6,7 @@ import { routes } from '../routes/routes';
 @Injectable({
   providedIn: 'root',
 })
+//datatag
 export class DataService {
   messages: any = '';
   message: BehaviorSubject<String>;
@@ -4320,202 +4321,49 @@ export class DataService {
   public sideBar: any = [
     {
       tittle: 'Home',
+      base: 'home',
+      base2:'home-two',
       base3:'home-three',
+      base4:'home-four',
       showAsTab: false,
       separateRoute: false,
       route: 'javascript:;',
       menu: [
-        
-       
         {
-          menuValue: 'Landing page',
+          menuValue: 'Home',
+          route: routes.home,
+          hasSubRoute: false,
+          showSubRoute: false,
+          base: 'home',
+          subMenus: [],
+        },
+        {
+          menuValue: 'Home Two',
+          route: routes.home2,
+          hasSubRoute: false,
+          showSubRoute: false,
+          base: 'home-two',
+          subMenus: [],
+        },
+        {
+          menuValue: 'Home Three',
           route: routes.home3,
           hasSubRoute: false,
           showSubRoute: false,
           base: 'home-three',
           subMenus: [],
         },
-      
-          {
-            menuValue: 'Dashboard',
-            route: routes.instructor_dashboard,
-            hasSubRoute: false,
-            showSubRoute: false,
-            base: 'instructor',
-            page: 'instructor-dashboard',
-            last: '',
-            subMenus: [],
-          },
-      
-      ],
-      
-    },
-
-    {
-      tittle: 'Dorm',
-      base:'dorm',
-      showAsTab: false,
-      separateRoute: false,
-      route: 'javascript:;',
-      menu: [       
         {
-          menuValue: 'rooms',
-          route: routes.students_subscription,
+          menuValue: 'Home Four',
+          route: routes.home4,
           hasSubRoute: false,
           showSubRoute: false,
-          base: 'rooms',
+          base: 'home-four',
           subMenus: [],
         },
-       
-      ],
-    },{
-      tittle: 'Restaurant',
-      base:'Menu',
-      showAsTab: false,
-      separateRoute: false,
-      route: 'javascript:;',
-      menu: [       
-        {
-          menuValue: 'Menu',
-          route: routes.page_course_list,
-          hasSubRoute: false,
-          showSubRoute: false,
-          base: 'menu',
-          subMenus: [],
-        },
-       
       ],
     },
     {
-      tittle: 'Events',
-      base:'event',
-      showAsTab: false,
-      separateRoute: false,
-      route: 'javascript:;',
-      menu: [       
-        {
-          menuValue: 'event',
-          route: routes.comming_soon,
-          hasSubRoute: false,
-          showSubRoute: false,
-          base: 'event',
-          subMenus: [],
-        },
-       
-      ],
-    },{
-      tittle: 'Impact',
-      base:'NGOs',
-      showAsTab: false,
-      separateRoute: false,
-      route: 'javascript:;',
-      menu: [       
-        {
-          menuValue: 'ngos',
-          route: routes.blog,
-          hasSubRoute: false,
-          showSubRoute: false,
-          base: 'ngo s',
-          subMenus: [],
-        },
-       
-      ],
-    },
-    {
-      tittle: 'Forum',
-      base:'forum',
-      showAsTab: false,
-      separateRoute: false,
-      route: 'javascript:;',
-      menu: [       
-        {
-          menuValue: 'Forum',
-          route: routes.blog_masonry,
-          hasSubRoute: false,
-          showSubRoute: false,
-          base: 'Forum',
-          subMenus: [],
-        },
-       
-      ],
-    },
-    {
-      tittle: 'Admin Dashboard',
-      base: 'admin-dashboard',
-      showAsTab: false,
-      separateRoute: false,
-      menu: [
-        {
-          menuValue: 'Partners',
-          hasSubRoute: true,
-          showSubRoute: false,
-          page: 'partners',
-          subMenus: [
-            {
-              menuValue: 'Add Partner',
-              route: routes.instructor_social_profiles,
-              hasSubRoute: false,
-              showSubRoute: false,
-              base: 'partners',
-              page: 'add-partners',
-              last:'',
-              subMenus: [],
-            },
-            {
-              menuValue: 'List Partners',
-              route: routes.instructor_dashboard,
-              hasSubRoute: false,
-              showSubRoute: false,
-              base: 'partners',
-              page: 'list-partners',
-              last:'',
-              subMenus: [],
-            },
-            
-          ],
-        },
-        {
-          menuValue: 'NGOs',
-          hasSubRoute: true,
-          showSubRoute: false,
-          page: 'ngos',
-          subMenus: [
-            {
-              menuValue: 'Add NGO',
-              route: routes.instructor_orders,
-              hasSubRoute: false,
-              showSubRoute: false,
-              base: 'ngos',
-              page: 'add-ngos',
-              last:'',
-              subMenus: [],
-            },
-            {
-              menuValue: 'List NGOs',
-              route: routes.instructor_tickets,
-              hasSubRoute: false,
-              showSubRoute: false,
-              base: 'ngos',
-              page: 'list-ngos',
-              last:'',
-              subMenus: [],
-            },
-            {
-              menuValue: 'Stats NGOs',
-              route: routes.instructor_security,
-              hasSubRoute: false,
-              showSubRoute: false,
-              base: 'ngos',
-              page: 'stats-ngos',
-              last:'',
-              subMenus: [],
-            }
-          ],
-        },
-      ],
-    },
-    
-    /*{
       tittle: 'Instructor',
       base: 'instructor',
       showAsTab: false,
@@ -4891,7 +4739,7 @@ export class DataService {
           subMenus: [],
         },
         {
-          menuValue: 'Course',
+          menuValue: 'Reclamation',
           hasSubRoute: true,
           showSubRoute: false,
           base: 'pages',
@@ -4899,7 +4747,7 @@ export class DataService {
           last: 'course-list',
           subMenus: [
             {
-              menuValue: 'Add Course',
+              menuValue: 'Add Reclamation',
               route: routes.page_add_course,
               hasSubRoute: false,
               showSubRoute: false,
@@ -4909,7 +4757,7 @@ export class DataService {
               subMenus: [],
             },
             {
-              menuValue: 'Course List',
+              menuValue: 'Reclamation List',
               route: routes.page_course_list,
               hasSubRoute: false,
               showSubRoute: false,
@@ -4919,7 +4767,7 @@ export class DataService {
               subMenus: [],
             },
             {
-              menuValue: 'Course Grid',
+              menuValue: 'Reclamation Grid',
               route: routes.page_course_grid,
               hasSubRoute: false,
               showSubRoute: false,
@@ -4929,7 +4777,188 @@ export class DataService {
               subMenus: [],
             },
             {
-              menuValue: 'Course Details',
+              menuValue: 'Reclamation Details',
+              route: routes.page_course_details,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-details',
+              subMenus: [],
+            },
+          ],
+        },
+        {
+          menuValue: 'Depences',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'pages',
+          page: 'course',
+          last: 'course-list',
+          subMenus: [
+            {
+              menuValue: 'Add Depences',
+              route: routes.page_add_depence,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'add-course',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Depences List',
+              route: routes.page_list_depence ,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-list',
+              subMenus: [],
+            }
+          
+          ],
+        },
+        {
+          menuValue: 'Projets',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'pages',
+          page: 'course',
+          last: 'course-list',
+          subMenus: [
+            {
+              menuValue: 'Add Projets',
+              route: routes.page_add_projets,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'add-course',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Projets List',
+              route: routes.page_list_projets,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-list',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Depences Grid',
+              route: routes.page_course_grid,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-grid',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Depences Details',
+              route: routes.page_course_details,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-details',
+              subMenus: [],
+            },
+          ],
+        },
+        {
+          menuValue: 'Frais inscription',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'pages',
+          page: 'course',
+          last: 'course-list',
+          subMenus: [
+            {
+              menuValue: 'Add Frais inscription',
+              route: routes.page_add_frais_inscri,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'add-course',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Frais inscription List',
+              route: routes.page_list_frais_inscri,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-list',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Frais inscription Grid',
+              route: routes.page_course_grid,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-grid',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Frais inscription Details',
+              route: routes.page_course_details,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-details',
+              subMenus: [],
+            },
+          ],
+        },
+        {
+          menuValue: 'Financier',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'pages',
+          page: 'course',
+          last: 'course-list',
+          subMenus: [
+            {
+              menuValue: 'Add Financier',
+              route: routes.page_add_projets,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'add-course',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Financier List',
+              route: routes.page_list_projets,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-list',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Financier Grid',
+              route: routes.page_course_grid,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'pages',
+              page: 'course',
+              last: 'course-grid',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Financier Details',
               route: routes.page_course_details,
               hasSubRoute: false,
               showSubRoute: false,
@@ -5070,6 +5099,7 @@ export class DataService {
         },
       ],
     },
+    
     {
       tittle: 'Blog',
       base: 'blog',
@@ -5127,7 +5157,8 @@ export class DataService {
           subMenus: [],
         },
       ],
-    },*/
+    },
+   
   ];
   public Instructor_sideBar: any = [
 
@@ -5144,13 +5175,6 @@ export class DataService {
         },
         {
           menuValue: 'My Courses',
-          route: routes.instructor_course,
-          icon: 'book',
-          base: 'instructor-course',
-          subMenus: [],
-        },
-        {
-          menuValue: 'My Campus Connect',
           route: routes.instructor_course,
           icon: 'book',
           base: 'instructor-course',
@@ -5258,7 +5282,7 @@ export class DataService {
         },
         {
           menuValue: 'Sign Out',
-          route: routes.home3,
+          route: routes.home,
           icon: 'power',
           base: '',
           subMenus: [],
