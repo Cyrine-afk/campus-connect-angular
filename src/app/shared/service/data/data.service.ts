@@ -4412,7 +4412,7 @@ export class DataService {
       menu: [       
         {
           menuValue: 'ngos',
-          route: routes.fournisseur,
+          route: routes.blog,
           hasSubRoute: false,
           showSubRoute: false,
           base: 'ngo s',
@@ -4439,6 +4439,82 @@ export class DataService {
        
       ],
     },
+    {
+      tittle: 'Admin Dashboard',
+      base: 'admin-dashboard',
+      showAsTab: false,
+      separateRoute: false,
+      menu: [
+        {
+          menuValue: 'Partners',
+          hasSubRoute: true,
+          showSubRoute: false,
+          page: 'partners',
+          subMenus: [
+            {
+              menuValue: 'Add Partner',
+              route: routes.instructor_social_profiles,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'partners',
+              page: 'add-partners',
+              last:'',
+              subMenus: [],
+            },
+            {
+              menuValue: 'List Partners',
+              route: routes.instructor_dashboard,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'partners',
+              page: 'list-partners',
+              last:'',
+              subMenus: [],
+            },
+            
+          ],
+        },
+        {
+          menuValue: 'NGOs',
+          hasSubRoute: true,
+          showSubRoute: false,
+          page: 'ngos',
+          subMenus: [
+            {
+              menuValue: 'Add NGO',
+              route: routes.instructor_orders,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'ngos',
+              page: 'add-ngos',
+              last:'',
+              subMenus: [],
+            },
+            {
+              menuValue: 'List NGOs',
+              route: routes.instructor_tickets,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'ngos',
+              page: 'list-ngos',
+              last:'',
+              subMenus: [],
+            },
+            {
+              menuValue: 'Stats NGOs',
+              route: routes.instructor_security,
+              hasSubRoute: false,
+              showSubRoute: false,
+              base: 'ngos',
+              page: 'stats-ngos',
+              last:'',
+              subMenus: [],
+            }
+          ],
+        },
+      ],
+    },
+    
     /*{
       tittle: 'Instructor',
       base: 'instructor',

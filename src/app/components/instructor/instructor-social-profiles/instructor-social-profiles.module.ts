@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InstructorSocialProfilesRoutingModule } from './instructor-social-profiles-routing.module';
-import { InstructorSocialProfilesComponent } from './instructor-social-profiles.component';
+import { AddFournisseurComponent } from './add-fournisseur.component';
 import { FeatherIconModule } from 'src/app/shared/module/feather.module';
 
 
 @NgModule({
   declarations: [
-    InstructorSocialProfilesComponent
+    
   ],
   imports: [
     CommonModule,

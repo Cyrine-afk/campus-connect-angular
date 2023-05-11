@@ -24,8 +24,8 @@ const routes: Routes = [
       {
         path: 'instructor-dashboard',
         loadChildren: () =>
-          import('./instructor-dashboard/instructor-dashboard.module').then(
-            (m) => m.InstructorDashboardModule
+          import('./instructor-dashboard/instructor-dashboard-routing.module').then(
+            (m) => m.InstructorDashboardRoutingModule
           ),
       },
       {
