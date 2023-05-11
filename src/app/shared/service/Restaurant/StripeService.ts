@@ -11,7 +11,8 @@ export class StripeService {
   
   private stripeApiUrl = 'http://localhost:8083/FactureR'; 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient
+    ) { }
 
   pay(factureId: number): Observable<any> {
     const url = `${this.stripeApiUrl}/pay/${factureId}`;
