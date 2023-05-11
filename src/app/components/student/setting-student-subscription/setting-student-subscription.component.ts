@@ -3,10 +3,8 @@ import { SubscriptionsService } from 'src/app/services/subscriptions.service';
 import { DataService } from 'src/app/shared/service/data/data.service';
 import { routes } from 'src/app/shared/service/routes/routes';
 import { Subscription } from 'src/app/models/subscriptions.model';
-import { Observable, debounceTime, distinct, distinctUntilChanged, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Chambre } from 'src/app/models/chambre.model';
-import { FormControl, FormGroup } from '@angular/forms';
-import { APIService } from 'src/app/services/api.service';
 
 
 @Component({
@@ -15,11 +13,6 @@ import { APIService } from 'src/app/services/api.service';
   styleUrls: ['./setting-student-subscription.component.scss']
 })
 export class SettingStudentSubscriptionComponent implements OnInit {
-  searchForm: FormGroup = new FormGroup({
-    search:new FormControl('')
-  })
-  public abonnementList:Array<any> = [];
-
   disponibiliteFilter: string = ''; // Default filter value is empty
   public chambresDisponible : Chambre[] = [];
   public chambersLowerThanPrice: Chambre[] = [];
@@ -33,15 +26,14 @@ export class SettingStudentSubscriptionComponent implements OnInit {
   showResultTable: boolean = false;
   showChambreTable : boolean = false;
   public maxPrice : number = 0;
-  constructor(private DataService: DataService, private subscriptionService: SubscriptionsService,) {
+  constructor(private DataService: DataService, private subscriptionService: SubscriptionsService) {
     this.settingStudentActive = this.DataService.settingStudentActive;
     this.settingStudentExpired = this.DataService.settingStudentExpired;
     this.subscriptionService.getAbonnements().subscribe(subs => {
       this.subs = subs;
-    
     });
 
-   
+
   }
   modifySub() {
     if (this.selectedSub) {

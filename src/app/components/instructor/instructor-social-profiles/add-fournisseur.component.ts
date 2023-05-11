@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Fournisseur } from 'src/app/models/fournisseur';
-import { FournisseurService } from 'src/app/shared/service/fournisseur/fournisseur.service';
+import { FournisseurService} from "../../../services/fournisseur/fournisseur.service";
 import { SpecialtyFourn, SpecialtyFourn2LabelMapping } from 'src/app/models/specialty-fourn';
 
 @Component({
@@ -25,10 +25,10 @@ export class AddFournisseurComponent implements OnInit {
   saveFournisseur () {
     this.fournisseurService.addFournisseur(this.fournisseur).subscribe((response)=>{
       console.log(response); //because we just want to print sth
-      
+
       //to clear the form's fields after hitting the save button
       this.fournisseur=new Fournisseur(); //assign a new reference (new reference => we will get all default values) so all will be replaced
-      
+
       //to switch the alert's state to true once the save is successful, to show the success alert
       this.showAlert=true;
     });
@@ -39,6 +39,6 @@ export class AddFournisseurComponent implements OnInit {
     this.showAlert=false
   }
 
-  
+
 
 }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InstructorOrdersComponent } from './instructor-orders.component';
+import { AddNgoComponent} from "./add-ngo.component";
 
-const routes: Routes = [{ path: '', component: InstructorOrdersComponent }];
+const routes: Routes = [{ path: '', component: AddNgoComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

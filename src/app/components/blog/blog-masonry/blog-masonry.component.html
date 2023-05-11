@@ -2,7 +2,7 @@
 <section class="course-content">
     <div class="container">
         <div class="row masonry-blog-blk">
-            <div class="col-lg-4 col-md-6" *ngFor="let data of blogMasonry">
+                <div class="col-lg-4 col-md-6" *ngFor="let data of listPosts; let i=index; masonry:true;">
 
                 <!-- Blog Post -->
                 <div class="blog grid-blog">

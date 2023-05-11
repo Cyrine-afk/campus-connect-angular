@@ -11,8 +11,9 @@
                 <a [routerLink]="routes.dashboard_instructor" class="btn btn-black">Back to Course</a>
               </li>
               <li>
-                <a href="javascript:;" class="btn btn-success-dark">Save</a>
+                <a href="javascript:" class="btn btn-success-dark" (click)="addEvent(this.events)">Save</a>
               </li>
+
             </ul>
           </div>
         </div>
@@ -24,7 +25,7 @@
           <!-- Course Wizard -->
           <div class="widget-set">
             <div class="widget-setcount">
-              <ul id="progressbar">
+              <ul id1="progressbar">
                 <li class="progress-active">
                   <p><span></span> Basic Information</p>
                 </li>
@@ -39,7 +40,14 @@
                 </li>
               </ul>
             </div>
-            <div class="widget-content multistep-form">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+            <!--<div class="widget-content multistep-form">
               <fieldset id="first" [ngStyle]="{'display': activeIndex === 0 ? 'block' : (activeIndex ? 'none' : null) }">
                 <div class="add-course-info mat-style">
                   <div class="add-course-inner-header">
@@ -59,7 +67,7 @@
                           <mat-option value="3">Category 03</mat-option>
                           <mat-option value="4">Category 04</mat-option>
                           <mat-option value="5">Category 05</mat-option>
-                          
+
                         </mat-select>
                       </div>
                       <div class="form-group">
@@ -70,7 +78,7 @@
                           <mat-option value="3">Level 03</mat-option>
                           <mat-option value="4">Level 04</mat-option>
                           <mat-option value="5">Level 05</mat-option>
-                          
+
                         </mat-select>
                       </div>
                       <div class="form-group mb-0">
@@ -372,11 +380,151 @@
                 </div>
               </fieldset>
             </div>
-          </div>
+          </div> -->
           <!-- /Course Wizard -->
-        </div>
+            <!--
       </div>
     </div>
   </div>
+</div>
+
 </section>
-<!-- /New Course -->
+-->
+<!-- New Course -->
+            <section class="page-content event-sec">
+              <div class="container">
+                <div class="row align-items-center">
+                  <div class="col-md-12">
+                    <div class="add-event-header">
+                      <h2>Add New Event</h2>
+                      <div class="add-event-btns">
+                        <ul class="nav">
+                          <li>
+                            <a [routerLink]="routes.dashboard_instructor" class="btn btn-black">Back to Events</a>
+                          </li>
+                          <li>
+                            <a href="javascript:" class="btn btn-success-dark" (click)="addEvent(Event)">SaveAsba</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <!-- Event Wizard -->
+                      <div class="widget-set">
+                        <div class="widget-setcount">
+                          <ul id="progressbar">
+                            <li class="progress-active">
+                              <p><span></span> Basic Information</p>
+                            </li>
+                            <li [ngClass]="{'progress-active': activeIndex === 1 ||  activeIndex === 2 ||  activeIndex === 3 ||  activeIndex === 4}">
+                              <p><span></span> Event Media</p>
+                            </li>
+                            <li [ngClass]="{'progress-active': activeIndex === 2 ||  activeIndex === 3 ||  activeIndex === 4}">
+                              <p><span></span> Details</p>
+                            </li>
+                            <li [ngClass]="{'progress-active': activeIndex === 3 ||  activeIndex === 4}">
+                              <p><span></span> Settings</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="widget-content multistep-form">
+                          <fieldset id="first" [ngStyle]="{'display': activeIndex === 0 ? 'block' : (activeIndex ? 'none' : null) }">
+                            <div class="add-event-info mat-style">
+                              <div class="add-event-inner-header">
+                                <h4>Basic Information</h4>
+                              </div>
+                              <div class="add-event-form">
+                                <form action="#">
+
+                                  <div class="form-group">
+                                    <label class="add-event-label">Event Name</label>
+                                    <input type="text" class="form-control" placeholder="Event Name" [(ngModel)]="Event.Name" name="eventName"/>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="add-event-label">Event Topic</label>
+                                    <input type="text" class="form-control" placeholder="Event Topic" [(ngModel)]="Event.Topic" name="eventTopic"/>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="add-event-label">Location</label>
+                                    <input type="text" class="form-control" placeholder="Location" [(ngModel)]="Event.location" name="eventLocation"/>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="add-event-label">Event Image</label>
+                                    <input type="file" class="form-control" [(ngModel)]="Event.Image" name="eventImage"/>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="add-event-label">Start Date</label>
+                                    <input type="date" class="form-control" placeholder="Start Date" [(ngModel)]="Event.StartDate" name="eventStartDate"/>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                            <div class="add-event-btns">
+                              <ul class="nav">
+                                <li>
+                                  <button class="btn btn-black" [disabled]="activeIndex === 0" (click)="previousStep()">Back</button>
+                                </li>
+                                <li>
+                                  <button class="btn btn-success-dark" (click)="nextStep()">Next</button>
+                                </li>
+                              </ul>
+                            </div>
+                          </fieldset>
+                          <fieldset id="second" [ngStyle]="{'display': activeIndex === 1 ? 'block' : (activeIndex === 0 || activeIndex === 2 || activeIndex === 3 || activeIndex === 4 ? 'none' : null) }">
+                            <div class="add-event-info mat-style">
+                              <div class="add-event-inner-header">
+                                <h4>Event Media</h4>
+                              </div>
+                              <div class="add-event-form">
+                                <form action="#">
+                                  <div class="form-group">
+                                    <label class="add-event-label">Event Description</label>
+                                    <textarea class="form-control" placeholder="Event Description" [(ngModel)]="Event.Themes" name="eventDescription"></textarea>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                            <div class="add-event-btns">
+                              <ul class="nav">
+                                <li>
+                                  <button class="btn btn-black" (click)="previousStep()">Back</button>
+                                </li>
+                                <li>
+                                  <button class="btn btn-success-dark" (click)="nextStep()">Next</button>
+                                </li>
+                              </ul>
+                            </div>
+                          </fieldset>
+                          <fieldset id="third" [ngStyle]="{'display': activeIndex === 2 ? 'block' : (activeIndex === 0 || activeIndex === 1 || activeIndex === 3 || activeIndex === 4 ? 'none' : null) }">
+                            <div class="add-event-info mat-style">
+                              <div class="add-event-inner-header">
+                                <h4>Details</h4>
+                              </div>
+                              <div class="add-event-form">
+                                <form action="#">
+                                  <div class="form-group">
+                                    <label class="add-event-label">Event Capacity</label>
+                                    <input type="number" class="form-control" placeholder="Event Capacity" [(ngModel)]="Event.nbrParticipant" name="eventCapacity"/>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="add-event-label">Ticket Price</label>
+                                    <input type="number" class="form-control" placeholder="Ticket Price" [(ngModel)]="Event.MaxNbrParticipant" name="eventPrice"/>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                            <div class="add-event-btns">
+                              <ul class="nav">
+                                <li>
+                                  <button class="btn btn-black" (click)="previousStep()">Back</button>
+                                </li>
+                                <li>
+                                  <button class="btn btn-success-dark" (click)="nextStep()">Next</button>
+                                </li>
+                              </ul>
+                            </div>
+                          </fieldset>

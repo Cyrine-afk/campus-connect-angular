@@ -11,20 +11,23 @@
                   <table class="table table-borderless mb-0">
                       <thead>
                         <tr>
-                          <th>order id</th>
-                          <th>date</th>
-                          <th>amount</th>
-                          <th>status</th>
+                          <th>idFactureR</th>
+                          <th>dateDebutAbnR</th>
+                          <th>dateFinAbnR</th>
+                          <th>emailUser</th>
+                          <th>statusPaiementR</th>
                           <th>&nbsp;</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let data of settingStudentInvoice">
-                          <td><a [routerLink]="routes.view_invoice_student" class="invoice-no">{{data.orderId}}</a></td>
-                          <td>{{data.date}}</td>
-                          <td>{{data.amount}}</td>
-                          <td><span [ngClass]="{'info-low': data.status === 'Completed', 'info-high' : data.status === 'Due' }" class="badge">{{data.status}}</span></td>
-                          <td><a href="javascript:;" class="btn-style">	<i-feather name="download"></i-feather></a></td>
+                        <tr *ngFor="let facture of factures">
+                          <td><a [routerLink]="routes.view_invoice_student" class="invoice-no">{{facture.idFactureR}}</a></td>
+                          <td>{{facture.dateDebutAbnR | date:'yyyy-MM-dd'}}</td>
+                          <td>{{facture.dateFinAbnR | date:'yyyy-MM-dd'}}</td>
+                          <td>{{facture.emailUser}}</td>
+                          <td><span [ngClass]="{'badge': true, 'badge-success': facture.statusPaiementR === true, 'badge-danger': facture.statusPaiementR === false }">{{facture.statusPaiementR}}</span></td>
+                          <td><a [routerLink]="[routes.page_checkout + '/' + facture.idFactureR]" class="btn btn-primary">validate payment</a></td>
+
                         </tr>
                       </tbody>
                     </table>

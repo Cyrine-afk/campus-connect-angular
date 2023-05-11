@@ -6,7 +6,6 @@ const routes: Routes = [{ path: '', component: SettingStudentSubscriptionCompone
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  
   exports: [RouterModule]
 })
 export class SettingStudentSubscriptionRoutingModule { }

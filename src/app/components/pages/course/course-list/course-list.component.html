@@ -42,16 +42,32 @@
                             <div class="show-filter add-course-info mat-style">
                                 <form action="#">
                                     <div class="row gx-2 align-items-center">
+
+
+
                                         <div class="col-md-6 col-item">
                                             <div class=" search-group">
                                               <i-feather name="search"></i-feather>
-                                                <input type="text" 
+                                                <input type="text"
                                                 [(ngModel)]="searchDataValue"
                                                  name="one"
-                                                (ngModelChange)="searchData(searchDataValue)" 
-                                                class="form-control" placeholder="Search our courses" >
+                                                (ngModelChange)="onSearch(searchDataValue)"
+                                                class="form-control" placeholder="Search our dishes" >
                                             </div>
                                         </div>
+
+
+                                      <!--Affichage des val nutri des plats-->
+                                      <!--  <div *ngIf="plat">
+                                            <h2>{{plat.nomMenu}}</h2>
+                                            <p>Calories: {{plat.calories}}</p>
+                                            <p>Protéines: {{plat.protein}}</p>
+                                            <p>Graisses: {{plat.fat}}</p>
+                                            <p>Glucides: {{plat.carbohydrates}}</p>
+                                        </div> -->
+                                      <!-- /test-->
+
+
                                         <div class="col-md-6 col-lg-6 col-item">
                                             <div class="form-group select-form mb-0">
                                                 <mat-select class="form-select select" name="sellist1"  [(value)]="selected">
@@ -70,60 +86,31 @@
                 </div>
                 <!-- /Filter -->
 
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 d-flex" *ngFor="let data of courseList">
-                        <div class="course-box course-design list-course d-flex">
-                            <div class="product">
-                                <div class="product-img">
-                                    <a [routerLink]="routes.page_course_details">
-                                        <img class="img-fluid" alt="" [src]="data.img1">
-                                    </a>
-                                    <div class="price">
-                                        <h3>{{data.amount1}} <span>{{data.amount2}}</span></h3>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <div class="head-course-title">
-                                        <h3 class="title"><a [routerLink]="routes.page_course_details">{{data.content1}}</a></h3>
-                                        <div class="all-btn all-category d-flex align-items-center">
-                                            <a [routerLink]="routes.page_checkout" class="btn btn-primary">{{data.content2}}</a>
-                                        </div>
-                                    </div>
-                                    <div class="course-info border-bottom-0 pb-0 d-flex align-items-center">
-                                        <div class="rating-img d-flex align-items-center">
-                                            <img [src]="data.img2" alt="">
-                                            <p>{{data.lesson}}</p>
-                                        </div>
-                                        <div class="course-view d-flex align-items-center">
-                                            <img [src]="data.img3" alt="">
-                                            <p>{{data.time}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star filled me-1"></i>
-                                        <i class="fas fa-star filled me-1"></i>
-                                        <i class="fas fa-star filled me-1"></i>
-                                        <i class="fas fa-star filled me-1"></i>
-                                        <i class="fas fa-star me-1"></i>
-                                        <span class="d-inline-block average-rating"><span>{{data.rating1}}</span> {{data.rating2}}</span>
-                                    </div>
-                                    <div class="course-group d-flex mb-0">
-                                        <div class="course-group-img d-flex">
-                                            <a [routerLink]="routes.instructor_instructor_profile"><img [src]="data.img4" alt="" class="img-fluid"></a>
-                                            <div class="course-name">
-                                                <h4><a [routerLink]="routes.instructor_instructor_profile">{{data.name}}</a></h4>
-                                                <p>{{data.role}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="course-share d-flex align-items-center justify-content-center">
-                                            <a href="javascript:void(0)"><i class="fa-heart" (click)="toggleClass(data)" [ngClass]="data.active ? 'fa-solid' : 'fa-regular'"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                <!--test affichage nutrition -->
+
+
+                <div class="row" *ngIf="plat">
+                    <div class="col-md-12">
+                      <div class="course-box course-design list-course d-flex">
+                        <div class="product">
+                          <div class="product-img">
+                            <a href="#">
+                              <img class="img-fluid">
+                            </a>
+                            <h5 class="card-title">{{plat.nomMenu}}</h5>
+                            <p class="card-text">Calories: {{plat.calories}}</p>
+                            <p class="card-text">Protéines: {{plat.protein}}</p>
+                            <p class="card-text">Graisses: {{plat.fat}}</p>
+                            <p class="card-text">Glucides: {{plat.carbohydrates}}</p>
+                          </div>
                         </div>
+                      </div>
                     </div>
-                </div>
+                  </div>
+
+                 <!-- /test affichage nutrition -->
+
 
                 <!-- /pagination -->
                 <div class="row">
