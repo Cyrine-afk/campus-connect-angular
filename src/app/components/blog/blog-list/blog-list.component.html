@@ -5,7 +5,8 @@
             <div class="col-lg-9 col-md-12">
 
                 <!-- Blog Post -->
-                <div class="blog" *ngFor="let data of blogList">
+                 <!-- **************************Original code ************************-->
+                <!-- <div class="blog" *ngFor="let data of blogList">
                     <div class="blog-image">
                         <a [routerLink]="routes.blog_details"><img class="img-fluid" [src]="data.img1"
                                 alt="Post Image"></a>
@@ -29,7 +30,124 @@
                         <p>{{data.paragraph}}</p>
                         <a [routerLink]="routes.blog_details" class="read-more btn btn-primary">Read More</a>
                     </div>
+                </div>-->
+                  <!-- ****************Converted code************************ -->
+
+
+                     <!-- Reviews -->
+                     <div class="blog-image">
+                      <!-- <img class="img-fluid" src="assets/only.jpg" alt="Post Image">-->
+                     <img class="img-fluid" src="assets/community.jpg" alt="Post Image">
+
+                     </div>
+
+                <div class="blog" *ngFor="let P of listPosts">
+                <div class="card review-sec">
+                    
+                <div class="card-body" *ngIf="!P.hidden" >
+                 <h5 class="subs-title" translate>{{P.title}}</h5>
+
+                <div class="instructor-wrap">
+                <div class="about-instructor">
+                <div class="abt-instructor-img">
+                  <a [routerLink]="routes.instructor_instructor_profile"><img src="assets/img/user/user1.jpg" alt="img" class="img-fluid"></a>
+                         </div>
+                                <div class="instructor-detail">
+                                    <h5><a [routerLink]="routes.instructor_instructor_profile">Nicole Brown</a></h5>
+                                    <p>UX/UI Designer</p>
+                                </div>
+                            </div>
+                            <li><img class="img-fluid" src="assets/img/icon/icon-22.svg" alt="">{{P.dateCreated}}</li>
+
+                            <!--  <div class="rating">
+                                <i class="fas fa-star filled me-1"></i>
+                                <i class="fas fa-star filled me-1"></i>
+                                <i class="fas fa-star filled me-1"></i>
+                                <i class="fas fa-star filled me-1"></i>
+                                <i class="fas fa-star me-1"></i>
+                                <span class="d-inline-block average-rating">{{P.nbLikesPost}} Likes</span>
+                            </div>-->
+
+
+                            <div class="rating">
+                                <i class="fas fa-thumbs-up filled me-1"></i>
+                                <span class="d-inline-block average-rating">{{P.nbLikes}} Likes</span>
+                            </div>
+                        </div>
+
+                    
+                      <!--   <p class="rev-info"  *ngIf="!P.hidden">{{ P.content }}</p> -->
+                     
+                           <p class="rev-info" *ngIf="!showFullContent">{{ P.content | slice:0:300 }}...</p>
+                           <p class="rev-info" *ngIf="!P.hidden && showFullContent">{{ P.content }}</p>
+                        
+                           <div class="add-article-btns">
+                         <a  (click)="showMore1(P)" class="read-more btn btn-primary toast-success"> {{ showFullContent ? 'Read Less' : 'Read More' }}</a>
+                        </div>
+                       <!-- [routerLink]="['/blog-details', {idPost: P.idPost}]"-->
+                       <!-- "routes.blog_details"-->
+                       <!--(click)="showMore(P)"-->
+                       <!-- (click)="showMore1(P.idPost)"-->
+
+
+                      <div class="add-article-btns  " *ngIf="!P.hidden">
+                        <a (click)="hidePost(P)" class="btn" style="float: right;">Hide</a>
+                    </div>
+                    
+
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+                    <div class="add-article-btns">
+                    <button   href="  https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"  (click)="signalerAbus(Post)" class="btn" style="float: right;" >Signaler un abus</button>
+                    </div>
+
+                    <!--  <button class="btn share-btn" >Share on Facebook</button> -->
+                     <!--<share-buttons [url]="blogPost.url" [fb]="facebookAppId"></share-buttons>-->
+                     <button (click)="likePost(Post.idPost)">
+                        <i class="far fa-thumbs-up"></i>
+                      </button>
+
+                      <!-- <h5 class="subs-title" translate>{{ translateTitle(P.title) }}</h5>
+                      <button (click)="changeLanguage('en')">English</button>
+                      <button (click)="changeLanguage('fr')">French</button>--> 
+                      
+                      
+
+
+
+                    </div>
                 </div>
+            </div>
+                <!-- /Reviews -->
+
+
+                  <!-- Add new Post -->
+                <div class="card comment-sec">
+                    <div class="card-body">
+                        <h5 class="subs-title">What's on your mind ?</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                 
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="submit-section">
+                                <button [routerLink]="routes.blog_grid" class="btn submit-btn" type="submit">Publish new Post </button>
+
+                            </div>
+                    </div>
+                </div>
+                <!-- /add New post -->
+
+
+
+
+
+
                 <!-- /Blog Post -->
 
                 <!-- Blog pagination -->
@@ -71,9 +189,9 @@
                     <!-- Search -->
                     <div class="card search-widget blog-search blog-widget">
                         <div class="card-body">
-                            <form class="search-form">
+                            <form (ngSubmit)="onSearch(searchKeyword)"  class="search-form">
                                 <div class="input-group">
-                                    <input type="text" placeholder="Search..." class="form-control">
+                                    <input type="text"id="searchKeyword" name="searchKeyword"  placeholder="Search..." class="form-control"  [(ngModel)]="searchKeyword">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                 </div>
                             </form>

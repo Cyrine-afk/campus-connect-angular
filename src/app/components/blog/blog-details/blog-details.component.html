@@ -5,6 +5,8 @@
             <div class="col-lg-9 col-md-12">
 
                 <!-- Blog Post -->
+
+                 <!--
                 <div class="blog">
                     <div class="blog-image">
                         <a [routerLink]="routes.blog_details"><img class="img-fluid" src="assets/img/blog-banner.jpg"
@@ -97,8 +99,110 @@
                             communication between you and your client, ensuring that everyone is on the same page when
                             working on a project together.</p>
                     </div>
+                </div>-->
+                <!-- /Blog Post --> 
+                                <!-- Converted -->
+                                <div class="blog-image">
+                                    <!-- <img class="img-fluid" src="assets/only.jpg" alt="Post Image">-->
+                                   <img class="img-fluid" src="assets/community.jpg" alt="Post Image">
+              
+                                   </div>
+                                 <!-- Detailed-post -->
+                                    <div class="card review-sec">
+                                    <div class="card-body">
+                                        <a   [routerLink]="routes.blog_list" >Go Back</a>
+
+                                        <h5 class="subs-title">{{ Post && Post.title }}</h5>
+                                      
+
+                                  <div class="instructor-wrap">
+                                  <div class="about-instructor">
+                                  <div class="abt-instructor-img">
+                                      <a [routerLink]="routes.instructor_instructor_profile"><img src="assets/img/user/user1.jpg" alt="img" class="img-fluid"></a>
+                                             </div>
+                                              <div class="instructor-detail">
+                                                <h5><a [routerLink]="routes.instructor_instructor_profile">Nicole Brown</a></h5>
+                                                <p>UX/UI Designer</p>
+                                            </div>
+                                                </div>
+                                                <div class="rating">
+                                                    <i class="fas fa-thumbs-up filled me-1"></i>
+                                                    <span class="d-inline-block average-rating">{{  Post && Post.nbLikes}} Likes</span>
+                                                </div>
+                                            
+                                            </div>
+                                            <p class="rev-info" *ngIf="showFullContent">{{ Post && Post.content }}</p>
+                                            <p class="rev-info" *ngIf="!showFullContent">{{ Post && Post.content | slice:0:600 }}...</p>
+
+
+                                            <!--  <a href="javascript:;" class="btn btn-reply"><i-feather name="corner-up-left" class="feather-icon"></i-feather> Reply</a>-->
+
+                                            <a  class="btn btn-reply" (click)="showCommentForm = !showCommentForm">
+                                                <i-feather name="corner-up-left" class="feather-icon"></i-feather> Reply
+                                              </a>
+                    
+                                                 <!-- <div class="add-article-btns">
+                                                    <a href="javascript:;" class="btn">Remove</a>
+                                                    <a href="javascript:;" classs="btn me-0">update</a>
+                                                  </div>-->
+                                                
+                                            
+                                              
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                 <!-- /Detailed-post --> 
+                                 <div *ngIf="commentAdded" class="alert alert-success" role="alert">
+                                    Commentaire ajouté
+                                  </div>
+                                 <div class="card comment-sec">
+                                    <h3 class="subs-title">Comments:</h3>
+                                    <ul>
+                                      <li *ngFor="let comment of comments">{{ comment.contentCom }}</li>
+                                    </ul>
+                                  </div>
+                                   
+                             <!-- Comment -->
+                <div class="card comment-sec">
+                    <div class="card-body">
+                        <h5 class="subs-title">Post A comment</h5>
+                        <div *ngIf="showCommentForm" >
+
+                        
+                        <form (ngSubmit)="onAddComment(Commentaire, Post.idPost)">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <textarea rows="4" class="form-control" placeholder="Your Comments"  [(ngModel)] ="Commentaire.contentCom" [ngModelOptions]="{standalone: true}"></textarea>
+                                  </div>
+
+
+                            
+                            <div class="submit-section">
+                                <button class="btn submit-btn" (click)="getComments(Post.idPost)" type="submit">Submit</button>
+                               
+                               <!-- (click)="getComments(Post.idPost)" -->
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <!-- /Blog Post -->
+                <!-- /Comment -->
+               
+                  
+
+                                 
+                                 <!-- /Converted --> 
+
+
 
             </div>
 
@@ -204,6 +308,5 @@
             <!-- /Blog Sidebar -->
 
         </div>
-    </div>
-</section>
+    
 <!-- /Blog Details -->
