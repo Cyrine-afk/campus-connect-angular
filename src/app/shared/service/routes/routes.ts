@@ -34,17 +34,6 @@ export class routes {
   public static get page_faq1(): string {
     return this.home3 + 'faq';
   }
-
-
-   // Stock Module Routings
-   public static get stock(): string {
-    return this.baseUrl + '/partners/';
-  }
-  public static get fournisseur(): string {
-    return this.stock + 'fournisseur-view';
-  }
-
-  
  
   // Instructor Routings
   public static get instructor_dashboard(): string {

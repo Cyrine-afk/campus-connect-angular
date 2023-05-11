@@ -5,15 +5,17 @@ import { SettingStudentSubscriptionRoutingModule } from './setting-student-subsc
 import { SettingStudentSubscriptionComponent } from './setting-student-subscription.component';
 import { FeatherIconModule } from 'src/app/shared/module/feather.module';
 
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     SettingStudentSubscriptionComponent
+    
   ],
   imports: [
     CommonModule,
     SettingStudentSubscriptionRoutingModule,
-    FeatherIconModule
+    FeatherIconModule,
+    FormsModule
   ]
 })
 export class SettingStudentSubscriptionModule { }
