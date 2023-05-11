@@ -38,6 +38,14 @@ const routes: Routes = [
             (m) => m.BlogModernModule
           ),
       },
+    
+      { 
+        path: 'blog-details/:idPost', 
+        loadChildren: () =>
+         import('./blog-details/blog-details.module').then((m) => m.BlogDetailsModule) 
+      },
+
+
     ],
   },
 ];

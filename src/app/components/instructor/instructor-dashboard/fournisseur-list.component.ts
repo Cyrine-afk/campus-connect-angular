@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Fournisseur } from 'src/app/models/fournisseur';
-import { FournisseurService } from 'src/app/shared/service/fournisseur/fournisseur.service';
+import { FournisseurService } from 'src/app/services/fournisseur/fournisseur.service';
 import { SpecialtyFourn, SpecialtyFourn2LabelMapping } from 'src/app/models/specialty-fourn';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
-
+import {map} from "rxjs";
+import {userAssigned} from "../../../models/userAssigned.model";
+import {DashboardService} from 'src/app/services/dashboardService.service'
 @Component({
   selector: 'app-fournisseur-list',
   templateUrl: './fournisseur-list.component.html',
@@ -12,7 +14,7 @@ import html2canvas from 'html2canvas';
 })
 export class FournisseurListComponent implements OnInit {
 
-  
+  assignedResponses:any;
   page: number = 1;
   count: number = 0;
   tableSize: number = 5;
@@ -20,13 +22,14 @@ export class FournisseurListComponent implements OnInit {
 
   fournisseurs!: Fournisseur[]; //to get the list of the fournisseurs in it
   public searchTxt: Fournisseur['nomFourn'];
-  constructor(private fournisseurService : FournisseurService) { } //calling external API from service API
+  constructor(private fournisseurService : FournisseurService, private dashboardService : DashboardService) { } //calling external API from service API
 
   signature: any;
 
 
   ngOnInit(): void {
     //at the time of loading, we want to call the API to get the fournisseur list
+    this.getChambersAndUsersAssigned()
     this.fournisseurService.getAllFourniseurs().subscribe((response:any)=> {
       this.fournisseurs=response
     }); //API call + load API response (result) in this.fournisseur
@@ -42,7 +45,7 @@ export class FournisseurListComponent implements OnInit {
     });
   }
 
-  
+
 
   onExportPdf() {
 
@@ -89,5 +92,18 @@ export class FournisseurListComponent implements OnInit {
     });
   }
 
-}
+  getChambersAndUsersAssigned() {
+    this.dashboardService.getChambersAndUsersAssigned()
+      .pipe(
+        map((response: userAssigned[]) => response.map((item: userAssigned) => ({
+          id: item.id,
+          bloc: item.bloc
+        })))
+      )
+      .subscribe((response: any) => {
+        console.log(response);
+        this.assignedResponses = response;
+      });
 
+  }
+}

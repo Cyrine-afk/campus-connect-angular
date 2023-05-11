@@ -33,13 +33,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./student/student.module').then((m) => m.StudentModule),
       },
-      
-      
-      { 
-        path: 'home-three', 
-        loadChildren: () => import('./home-list/home3/home3.module').then(m => m.Home3Module) 
+
+
+      {
+        path: 'home-three',
+        loadChildren: () => import('./home-list/home3/home3.module').then(m => m.Home3Module)
       },
-      
+
     ],
   },
 ];

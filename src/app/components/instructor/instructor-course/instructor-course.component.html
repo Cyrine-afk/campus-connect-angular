@@ -3,8 +3,8 @@
         <div class="settings-widget">
             <div class="settings-inner-blk p-0">
                 <div class="sell-course-head comman-space">
-                    <h3>Courses</h3>
-                    <p>Manage your courses and its update like live, draft and insight.</p>
+                    <h3>Restaurant management </h3>
+                    <p>Manage your Restaurant and its update like live, draft and insight.</p>
                 </div>
                 <div class="comman-space pb-0">
                     <div class="instruct-search-blk">
@@ -37,7 +37,7 @@
                     <div class="settings-tickets-blk course-instruct-blk table-responsive">
 
                         <!-- Referred Users-->
-                        <table class="table table-nowrap mb-2">
+                       <!--   <table class="table table-nowrap mb-2">
                             <thead>
                                 <tr>
                                     <th>COURSES</th>
@@ -81,8 +81,113 @@
                                             class="badge">{{data.status}}</span></td>
                                 </tr>
                             </tbody>
-                        </table>
-                        <!-- /Referred Users-->
+                        </table>-->
+                        <!-- /Referred Users-->  
+                           
+
+
+<!-- Instructor Dashboard -->
+<section class="page-content course-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card instructor-card">
+                    <div class="card-header">
+                        <h4>My Plats</h4>
+                        <a [routerLink]="routes.page_add_course" class="btn btn-dark">Create New Plat</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="instructor-grid" *ngFor="let ps of listPlats">
+                            <div class="product-img">
+                                <a [routerLink]="routes.page_course_details">
+                                    <img [src]="ps.img1" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="instructor-product-content">
+                                <div class="head-course-title">
+                                    <h3 class="title"><a [routerLink]="routes.page_course_details">{{ps.nomMenu}}</a>
+                                    </h3>
+                                </div>
+                                <div class="course-info d-flex align-items-center border-bottom-0 pb-0">
+                                    <div class="rating-img d-flex align-items-center">
+                                        <img [src]="ps.img2" alt="">
+                                        <p>{{ps.typePlat}}</p>
+                                    </div>
+                                    <div class="course-view d-flex align-items-center">
+                                        <img [src]="ps.img3" alt="">
+                                        <p>{{ps.imagePlat}}</p>
+                                    </div>
+                                    <div class="course-view d-flex align-items-center">
+                                        <img [src]="ps.img3" alt="">
+                                        <p>{{ps.specificationMenu}}</p>
+                                    </div>
+                                </div>
+                                <div class="rating mb-0">
+                                    <i class="fas fa-star filled me-1"></i>
+                                    <i class="fas fa-star filled me-1"></i>
+                                    <i class="fas fa-star filled me-1"></i>
+                                    <i class="fas fa-star filled me-1"></i>
+                                    <i class="fas fa-star me-1"></i>
+                                    <span class="d-inline-block average-rating"><span>{{ps.rating}}</span>
+                                        {{ps.ratingNum}}</span>
+                                </div>
+
+                                </div>
+                                
+                                <div class="add-article-btns "class="cart-remove" >
+                                    <a href="javascript:;" [routerLink]="routes.page_add_course" class="btn btn-primary">Update Plat</a>
+    
+                                </div>
+                            <div class="add-article-btns " class="cart-remove">
+
+                                <a href="javascript:;" (click)="deletePlat(ps.idPlat)" class="btn btn-primary" style="float: right;">Remove</a>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="pagination">
+            
+            <span>Page {{currentPage}} of {{totalPages}}</span>
+            <mat-form-field>
+              <mat-label>Page Size</mat-label>
+              <mat-select [(ngModel)]="pageSize" (selectionChange)="changePageSize()">
+                <mat-option value="5">5</mat-option>
+                <mat-option value="10">10</mat-option>
+                <mat-option value="20">20</mat-option>
+                <mat-option value="50">50</mat-option>
+              </mat-select>
+            </mat-form-field>
+           
+          </div>
+          <div class="pagination">
+            <button class="pagination__btn" (click)="previousPage()" [disabled]="currentPage === 1" tabindex="-1">
+              <i class="fas fa-angle-left"></i>
+            </button>
+            <ul class="pagination__list">
+              <li class="pagination__item" [ngClass]="{ 'pagination__item--active': i === currentPage }" *ngFor="let i of pages">
+                <button class="pagination__link" (click)="setPage(i)">{{ i }}</button>
+              </li>
+            </ul>
+            <button class="pagination__btn" (click)="moveToPage1()" [disabled]="currentPage === totalPages">
+              <i class="fas fa-angle-right"></i>
+            </button>
+          </div>
+
+
+
+          
+
+
+
+    </div>
+</section>
+<!-- /Instructor Dashboard -->
+
 
                     </div>
                 </div>

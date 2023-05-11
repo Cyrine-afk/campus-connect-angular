@@ -3,6 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DataService } from 'src/app/shared/service/data/data.service';
 import { Sort } from '@angular/material/sort';
 import { routes } from 'src/app/shared/service/routes/routes';
+import { Plat } from 'src/app/models/plat';
+import { PlatService } from 'src/app/services/Restaurant/plat.service';
+
 @Component({
   selector: 'app-instructor-course',
   templateUrl: './instructor-course.component.html',
@@ -13,6 +16,14 @@ export class InstructorCourseComponent implements OnInit {
   public instructorCourse: any = [];
   public searchDataValue = '';
   dataSource!: MatTableDataSource<any>;
+  public myCourse : any = [];
+
+  public listPlats : any = [];
+  form : boolean = false;
+   plat!: Plat;
+   closeResult! : string;
+
+
 
   // pagination variables
   public lastIndex: number = 0;
@@ -27,13 +38,41 @@ export class InstructorCourseComponent implements OnInit {
   public pageSelection: Array<pageSelection> = [];
   public totalPages: number = 0;
   selected = '1';
-  constructor(private data: DataService) {
-    
+  public selectedPage: number = 0;
+
+  pages: number[] = [];
+
+
+
+  constructor(private data: DataService, private ps : PlatService) {
+   // this.myCourse = this.data.myCourse;
+        this.listPlats= this.ps.getAllPlats;
   }
 
   ngOnInit(): void {
-    this.getinstructorCourse();
+    //this.getinstructorCourse();
+    this.getAllPlats();;
+
+
+    this.plat = {
+      idPlat: null,
+      typePlat: null,
+      nomMenu: null,
+      imagePlat: null,
+      specificationMenu: null,
+      nutritionalInformation: null,
+      calories:  null,
+      protein:  null,
+      fat:  null,
+      carbohydrates:  null,
+    }
   }
+
+ /* getAllPlats(){
+    this.ps.getAllPlats().subscribe(res => this.listPlats = res)
+  } */
+
+/*
   private getinstructorCourse(): void {
     this.instructorCourse = [];
     this.serialNumberArray = [];
@@ -52,8 +91,36 @@ export class InstructorCourseComponent implements OnInit {
     this.calculateTotalPages(this.totalData, this.pageSize);
     });
 
- 
+
   }
+
+*/
+
+
+public deletePlat(idPlat: any) {
+  if (confirm("Are you sure you want to delete this plat?")) {
+    this.ps.deletePlat(idPlat).subscribe(() => {
+      this.getAllPlats();
+    });
+  }
+}
+
+private getAllPlats(): void {
+  this.listPlats = [];
+
+  this.ps.getAllPlats().subscribe((res: any) => {
+    res.map((res: any, index: number) => {
+      let serialNumber = index + 1;
+      if (index >= this.skip && serialNumber <= this.limit) {
+        res.id = serialNumber;
+        this.listPlats.push(res);
+      }
+    });
+    this.dataSource = new MatTableDataSource<any>(this.listPlats);
+    this.calculateTotalPages(this.listPlats.length, this.pageSize);
+  });
+}
+
   public sortData(sort: Sort) {
     const data = this.instructorCourse.slice();
 
@@ -79,13 +146,13 @@ public getMoreData(event: string): void {
       this.pageIndex = this.currentPage - 1;
       this.limit += this.pageSize;
       this.skip = this.pageSize * this.pageIndex;
-      this.getinstructorCourse();
+      this.getAllPlats();
     } else if (event == 'previous') {
       this.currentPage--;
       this.pageIndex = this.currentPage - 1;
       this.limit -= this.pageSize;
       this.skip = this.pageSize * this.pageIndex;
-      this.getinstructorCourse();
+      this.getAllPlats();
     }
 }
 
@@ -98,7 +165,17 @@ public getMoreData(event: string): void {
     } else if (pageNumber < this.currentPage) {
       this.pageIndex = pageNumber + 1;
     }
-    this.getinstructorCourse();
+    this.getAllPlats();
+    }
+
+    moveToPage1(): void {
+      const input = (document.getElementById('moveToPageInput') as HTMLInputElement).value;
+      const page = parseInt(input);
+
+      if (page && page > 0 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.getAllPlats();
+      }
     }
 
   public changePageSize(): void {
@@ -106,7 +183,7 @@ public getMoreData(event: string): void {
     this.limit = this.pageSize;
     this.skip = 0;
     this.currentPage = 1;
-    this.getinstructorCourse();
+    this.getAllPlats();
   }
 
   private calculateTotalPages(totalData: number, pageSize: number): void {
@@ -121,6 +198,21 @@ public getMoreData(event: string): void {
       this.pageNumberArray.push(i);
       this.pageSelection.push({ skip: skip, limit: limit });
     }
+    }
+
+
+    previousPage(): void {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.getAllPlats();
+      }
+    }
+
+    setPage(page: number): void {
+      if (this.currentPage !== page) {
+        this.currentPage = page;
+        this.getAllPlats();
+      }
     }
 }
 export interface pageSelection {

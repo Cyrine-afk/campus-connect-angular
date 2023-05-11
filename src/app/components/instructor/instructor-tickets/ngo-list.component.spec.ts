@@ -1,17 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BlogGridComponent } from './blog-grid.component';
-describe('BlogGridComponent', () => {
-  let component: BlogGridComponent;
-  let fixture: ComponentFixture<BlogGridComponent>;
+import { NgoListComponent } from './ngo-list.component';
+
+describe('NgoListComponent', () => {
+  let component: NgoListComponent;
+  let fixture: ComponentFixture<NgoListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BlogGridComponent ]
+      declarations: [ NgoListComponent ]
     })
     .compileComponents();
+  });
 
-    fixture = TestBed.createComponent(BlogGridComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(NgoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
